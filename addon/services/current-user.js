@@ -4,6 +4,13 @@ import { computed, set, get } from '@ember/object';
 import { assert } from '@ember/debug';
 import { task } from 'ember-concurrency';
 
+/**
+ * Current user service.
+ *
+ * TODO:
+ * -- Make route transitions configurable / optional
+ * -- Make Feature setting configurable / optional
+ */
 export default Service.extend({
   router: service(),
   session: service(),
@@ -179,7 +186,7 @@ export default Service.extend({
 
     taskInstance.then(() => {
       if (this.get('user') && !this.get('organization')) {
-        //this.get('router').transitionTo('onboarding.registration');
+        this.get('router').transitionTo('onboarding.registration');
       }
     });
 
