@@ -1,5 +1,4 @@
 import Service, { inject as service } from '@ember/service';
-import { isEmpty } from '@ember/utils';
 import { computed, set, get } from '@ember/object';
 import { assert } from '@ember/debug';
 import { task } from 'ember-concurrency';
