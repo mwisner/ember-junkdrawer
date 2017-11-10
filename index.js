@@ -91,7 +91,6 @@ module.exports = {
     this.app = app;
 
     this.junkdrawerOptions = extend(extend({}, defaultOptions), app.options['ember-junkdrawer']);
-    console.log(this.junkdrawerOptions);
   },
 
   treeForVendor(tree) {
@@ -137,7 +136,6 @@ module.exports = {
     if (name in fileMap)  {
       thing = fileMap[name];
     }
-d
     if (!thing) {
       return false;
     }
@@ -152,8 +150,6 @@ d
     if (whitelist.length && blacklist.length === 0) {
       return !isWhitelisted;
     }
-
-    console.log(isBlacklisted);
 
     return isBlacklisted;
   },
