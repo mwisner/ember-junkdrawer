@@ -1,10 +1,10 @@
-import { computed } from '@ember/object';
+import { computed, get, set, getProperties, setProperties } from '@ember/object';
 import Service from '@ember/service';
+import { getOwner } from '@ember/application';
 
 export default Service.extend({
-  pageTitleRaw: 'Capitol Zen',
+  pageTitleRaw: '',
   pageDescriptionRaw: null,
-  pageActionsComponentRaw: null,
 
   pageTitle: computed('pageTitleRaw', function() {
     return this.get('pageTitleRaw');
@@ -13,8 +13,4 @@ export default Service.extend({
   pageDescription: computed('pageDescriptionRaw', function() {
     return this.get('pageDescriptionRaw');
   }),
-
-  pageActions: computed('pageActionsComponentRaw', function() {
-    return this.get('pageActionsComponentRaw');
-  })
 });
