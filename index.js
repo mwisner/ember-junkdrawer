@@ -93,11 +93,6 @@ module.exports = {
     this.junkdrawerOptions = extend(extend({}, defaultOptions), app.options['ember-junkdrawer']);
   },
 
-  treeForVendor(tree) {
-    let trees = [tree];
-    return mergeTrees(trees, {overwrite: true});
-  },
-
   treeForAddon(tree) {
     tree = this.filterComponents(tree);
     tree = this.debugTree(tree, 'addon-tree:tree-shaken');
