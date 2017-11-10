@@ -1,26 +1,31 @@
 # ember-junkdrawer
 
-This README outlines the details of collaborating on this Ember addon.
+https://www.npr.org/sections/theprotojournalist/2014/08/15/337759135/what-your-junk-drawer-reveals-about-you
 
-## Installation
+# Tree Shaking
+Use either blacklist or whitelist, not both.
+In your ember-cli-build.js:
 
-* `git clone <repository-url>` this repository
-* `cd ember-junkdrawer`
-* `npm install`
+```js
+    'ember-junkdrawer': {
+      'blacklist': [
+        'service:current-user'
+      ]
+    },
+```
 
-## Running
-
-* `ember serve`
-* Visit your app at [http://localhost:4200](http://localhost:4200).
-
-## Running Tests
-
-* `npm test` (Runs `ember try:each` to test your addon against multiple Ember versions)
-* `ember test`
-* `ember test --server`
-
-## Building
-
-* `ember build`
-
-For more information on using ember-cli, visit [https://ember-cli.com/](https://ember-cli.com/).
+## List of things that can be added/removed:
+| Type          |       Label |
+| ------------- | ------------- |
+| Form Control  | form-control:avatar  |
+| Component  | component:changeset-form  |
+| Component  | component:simple-form-group  |
+| Component  | component:table-loader  |
+| Component  | component:thing-list-item  |
+| Component  | component:thing-list  |
+| Component  | component:thing-list  |
+| Component  | component:ui-box  |
+| Component  | helper:ui-page-property  |
+| Component  | mixin:model-data-table-common  |
+| Component  | service:current-user  |
+| Component  | service:ui-global  |
