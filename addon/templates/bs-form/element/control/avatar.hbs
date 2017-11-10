@@ -1,0 +1,73 @@
+{{!--
+here we either show the original file or an uploader.
+--}}
+
+{{#if (eq state 'default')}}
+  <img class="avatar-original-preview" src="{{value_file_url}}" />
+  {{#bs-button type="primary" icon="fa fa-download" onClick=(action "replaceExisting")}}
+    Replace
+  {{/bs-button}}
+
+{{else if (eq state 'upload')}}
+  {{#file-dropzone name=uploaderName as |dropzone queue|}}
+    <div class="avatar-upload-container {{if dropzone.active "file-upload-valid"}}">
+      {{#if dropzone.active}}
+        {{#if dropzone.valid}}
+          <p class="text-center text-success">Drop to upload</p>
+        {{else}}
+          <p class="text-center text-danger">Invalid</p>
+        {{/if}}
+      {{else}}
+        {{#if dropzone.supported}}
+          {{dragAndDropMessage}}
+        {{/if}}
+      {{/if}}
+
+      {{#file-upload
+        name=uploaderName
+        multiple=false
+        accept=accept
+        onfileadd=(action "fileUpload")
+      }}
+      <a class="avatar-upload-selector">
+        {{fa-icon 'upload'}}
+      </a>
+      {{/file-upload}}
+
+    </div>
+
+  {{/file-dropzone}}
+{{else if (eq state 'crop')}}
+  {{#bs-modal open=cropModalOpen renderInPlace=true
+              onHide=(action "cancelCropping")
+              onSubmit=(action "doneCropping") as |modal|}}
+    {{#modal.body}}
+      <div class="cropper-wrapper">
+        {{#image-cropper
+          source=original_file_url
+          options=(hash
+            aspectRatio=1
+            viewMode=1
+            autoCrop=true
+            scalable=false
+            zoomable=false
+            movable=false
+            rotatable=false
+            minCropBoxWidth='240'
+            minCropBoxheight='240'
+          ) as |cropper|}}
+        {{/image-cropper}}
+      </div>
+    {{/modal.body}}
+
+    {{#modal.footer as |footer|}}
+      {{#bs-button onClick=(action modal.close) type="secondary"}}Cancel{{/bs-button}}
+      {{#bs-button onClick=(action modal.submit) type="primary"}}Done{{/bs-button}}
+    {{/modal.footer}}
+  {{/bs-modal}}
+
+{{else if (eq state 'loading')}}
+  <div class="loading-wrapper">
+    <i class="fa fa-spinner fa-spin fa-3x"></i>
+  </div>
+{{/if}}

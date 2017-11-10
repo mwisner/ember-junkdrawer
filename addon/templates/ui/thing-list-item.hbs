@@ -1,0 +1,29 @@
+{{yield}}
+{{#yield-slot 'item-left'}}
+  <div class="thing-item-left">
+    {{yield}}
+  </div>
+{{/yield-slot}}
+
+<div class="thing-item-middle">
+
+  {{#yield-slot 'item-title'}}
+    <h4>{{yield}}</h4>
+  {{/yield-slot}}
+
+  {{#yield-slot 'item-content'}}
+    <div class="item-content">{{yield}}</div>
+  {{/yield-slot}}
+
+  {{#yield-slot 'item-content-list'}}
+    <ul class="item-list-group">
+      {{yield}}
+    </ul>
+  {{/yield-slot}}
+</div>
+
+{{#yield-slot 'item-right'}}
+  <div class="thing-item-right">
+    {{yield}}
+  </div>
+{{/yield-slot}}

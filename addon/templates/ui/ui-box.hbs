@@ -1,0 +1,34 @@
+{{yield}}
+
+{{#yield-slot 'image'}}
+  <div class="card-thumbnail">
+    {{yield}}
+  </div>
+{{/yield-slot}}
+
+{{#yield-slot 'title'}}
+  <div class="card-header">
+    <h5>{{yield}}</h5>
+  </div>
+{{/yield-slot}}
+
+
+{{#yield-slot 'content'}}
+  <div class="card-body {{content-modifier}}">
+    {{yield}}
+  </div>
+{{/yield-slot}}
+
+
+{{#yield-slot 'list'}}
+  <ul class="list-group list-group-flush">
+    {{yield}}
+  </ul>
+{{/yield-slot}}
+
+
+{{#yield-slot 'footer'}}
+  <div class="card-footer">
+    {{yield}}
+  </div>
+{{/yield-slot}}

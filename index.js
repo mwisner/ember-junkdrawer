@@ -2,5 +2,9 @@
 'use strict';
 
 module.exports = {
-  name: 'ember-junkdrawer'
+  name: 'ember-junkdrawer',
+
+  isDevelopingAddon: function() {
+    return true;
+  }
 };
