@@ -1,0 +1,60 @@
+{{#unless has-block}}
+  <div class="thing-item-middle text-muted">
+    <h3>{{title}}</h3>
+    {{#if message}}
+      <div class="item-content">
+        <p><em>{{message}}</em></p>
+      </div>
+    {{/if}}
+
+  </div>
+{{else}}
+
+  {{yield}}
+
+  {{#yield-slot 'item-left'}}
+    <div class="thing-item-left">
+      {{yield}}
+    </div>
+  {{/yield-slot}}
+
+  <div class="thing-item-middle">
+
+    {{#yield-slot 'item-title'}}
+      <h3>{{yield}}</h3>
+
+    {{else}}
+      <h3>{{title}}</h3>
+    {{/yield-slot}}
+
+    {{#yield-slot 'item-content'}}
+      <div class="item-content">
+        {{yield}}
+      </div>
+    {{else}}
+      {{#if message}}
+        <div class="item-content">
+          <p><em>{{message}}</em></p>
+        </div>
+      {{/if}}
+    {{/yield-slot}}
+
+    {{#yield-slot 'item-content-list'}}
+      <ul class="item-list-group">
+        {{yield}}
+      </ul>
+    {{/yield-slot}}
+
+    {{#yield-slot 'no-things-action'}}
+      <div class="thing-item-right">
+        {{yield}}
+      </div>
+    {{/yield-slot}}
+  </div>
+
+  {{#yield-slot 'item-right'}}
+    <div class="thing-item-right">
+      {{yield}}
+    </div>
+  {{/yield-slot}}
+{{/unless}}
