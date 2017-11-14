@@ -6,6 +6,8 @@ import { isEmpty } from '@ember/utils';
 import Table from 'ember-light-table';
 import { task } from 'ember-concurrency';
 import { A } from "@ember/array";
+import { setProperties } from "@ember/object";
+
 import layout from '../../templates/table/model-table';
 
 export default Component.extend({
@@ -21,8 +23,22 @@ export default Component.extend({
   enableSync: true,
   model: A([]),
   meta: null,
-  columns: null,
+  columns: [],
   table: null,
+
+  /**
+   *
+   */
+  init() {
+    this._super(...arguments);
+
+    this.setProperties({
+      table: null,
+      model: A([]),
+      canLoadMore: true,
+    });
+
+  },
 
   /**
    *
@@ -53,7 +69,12 @@ export default Component.extend({
   fetchRecords: task(function*() {
     let query = this.getProperties(['page', 'page_size', 'sort']);
     query = assign(query, this.get('recordQuery'));
-    let records = yield this.get('store').query(this.get('recordType'), query);
+    let records = yield this.get('store')
+      .query(this.get('recordType'), query)
+      .catch(data => {
+        return A([]);
+      });
+
     if (records.get('length')) {
       this.get('model').pushObjects(records.toArray());
       this.set('canLoadMore', true);
@@ -70,7 +91,6 @@ export default Component.extend({
     this.setProperties({
       canLoadMore: true,
       page: 1,
-      meta: null,
     });
     this.get('model').clear();
     this.get('fetchRecords').perform();
