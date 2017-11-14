@@ -1,0 +1,38 @@
+{{yield (hash
+          filter=(component 'table/table/table-filter'
+            parentComponent=this
+          )
+          columns=columns
+)}}
+
+<div class="row">
+  <div class="col-md-12">
+    {{#ui/ui-box content-modifier="no-padding"}}
+      {{#block-slot 'content'}}
+        {{#if table }}
+          {{#light-table table class="table table-hover" height='65vh' as |t|}}
+          {{t.head
+            onColumnClick=(action 'onColumnClick')
+            iconAscending='fa fa-sort-asc'
+            iconDescending='fa fa-sort-desc'
+            fixed=true
+          }}
+
+          {{#t.body
+            canSelect=false
+            onScrolledToBottom=(action 'onScrolledToBottom')
+          as |body|
+          }}
+            {{#if isLoading}}
+              {{#body.loader}}
+                {{table/table-loader}}
+              {{/body.loader}}
+            {{/if}}
+          {{/t.body}}
+
+        {{/light-table}}
+        {{/if}}
+      {{/block-slot}}
+    {{/ui/ui-box}}
+  </div>
+</div>
