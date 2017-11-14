@@ -1,21 +1,9 @@
-<div class="card-header">
-  <h5>
-    {{yield (hash header=(component 'ui/ui-box/ui-box-header'))}}
-  </h5>
-</div>
+{{yield (hash header=(component 'ui/ui-box/ui-box-header' contentModifier=contentModifier))}}
 
-<div class="card-body {{content-modifier}}">
-  {{yield (hash body=(component 'ui/ui-box/ui-box-body'))}}
-</div>
+{{yield (hash body=(component 'ui/ui-box/ui-box-body' contentModifier=contentModifier))}}
 
-<div class="card-footer">
-  {{yield (hash footer=(component 'ui/ui-box/ui-box-footer'))}}
-</div>
+{{yield (hash footer=(component 'ui/ui-box/ui-box-footer' contentModifier=contentModifier))}}
 
-<ul class="list-group list-group-flush">
-  {{yield (hash list=(component 'ui/ui-box/ui-box-list'))}}
-</ul>
+{{yield (hash list=(component 'ui/ui-box/ui-box-list' contentModifier=contentModifier))}}
 
-<div class="card-thumbnail">
-  {{yield (hash image=(component 'ui/ui-box/ui-box-image'))}}
-</div>
+{{yield (hash image=(component 'ui/ui-box/ui-box-image' contentModifier=contentModifier))}}
