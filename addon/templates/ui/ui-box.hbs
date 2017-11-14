@@ -13,11 +13,11 @@
 {{/yield-slot}}
 
 
-{{#yield-slot 'content'}}
+{{!--#yield-slot 'content'}}
   <div class="card-body {{content-modifier}}">
     {{yield}}
   </div>
-{{/yield-slot}}
+{{/yield-slot --}}
 
 
 {{#yield-slot 'list'}}
@@ -32,3 +32,26 @@
     {{yield}}
   </div>
 {{/yield-slot}}
+
+
+<!-- Testing contextual component refactor  -->
+<div class="card-body {{content-modifier}}">
+  {{yield (hash body=(component 'ui/ui-box/ui-box-body'))}}
+</div>
+
+
+{{!--
+
+{{yield (hash header=(component 'ui/ui-box/ui-box-header'))}}
+
+<div class="card-body {{content-modifier}}">
+  {{yield (hash body=(component 'ui/ui-box/ui-box-body'))}}
+</div>
+
+{{yield (hash footer=(component 'ui/ui-box/ui-box-footer'))}}
+
+{{yield (hash image=(component 'ui/ui-box/ui-box-image'))}}
+
+{{yield (hash list=(component 'ui/ui-box/ui-box-list'))}}
+
+--}}
