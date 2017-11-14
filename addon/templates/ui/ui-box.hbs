@@ -1,57 +1,29 @@
-{{yield}}
+{{!--
+<div class="card-header">
+  <h5>
+    {{yield (hash header=(component 'ui/ui-box/ui-box-header'))}}
+  </h5>
+</div>
 
-{{#yield-slot 'image'}}
-  <div class="card-thumbnail">
-    {{yield}}
-  </div>
-{{/yield-slot}}
-
-{{#yield-slot 'title'}}
-  <div class="card-header">
-    <h5>{{yield}}</h5>
-  </div>
-{{/yield-slot}}
-
-
-{{!--#yield-slot 'content'}}
-  <div class="card-body {{content-modifier}}">
-    {{yield}}
-  </div>
-{{/yield-slot --}}
-
-
-{{#yield-slot 'list'}}
-  <ul class="list-group list-group-flush">
-    {{yield}}
-  </ul>
-{{/yield-slot}}
-
-
-{{#yield-slot 'footer'}}
-  <div class="card-footer">
-    {{yield}}
-  </div>
-{{/yield-slot}}
-
+--}}
 
 <!-- Testing contextual component refactor  -->
 <div class="card-body {{content-modifier}}">
   {{yield (hash body=(component 'ui/ui-box/ui-box-body'))}}
 </div>
 
-
 {{!--
 
-{{yield (hash header=(component 'ui/ui-box/ui-box-header'))}}
-
-<div class="card-body {{content-modifier}}">
-  {{yield (hash body=(component 'ui/ui-box/ui-box-body'))}}
+<div class="card-footer">
+  {{yield (hash footer=(component 'ui/ui-box/ui-box-footer'))}}
 </div>
 
-{{yield (hash footer=(component 'ui/ui-box/ui-box-footer'))}}
+<ul class="list-group list-group-flush">
+  {{yield (hash list=(component 'ui/ui-box/ui-box-list'))}}
+</ul>
 
-{{yield (hash image=(component 'ui/ui-box/ui-box-image'))}}
-
-{{yield (hash list=(component 'ui/ui-box/ui-box-list'))}}
+<div class="card-thumbnail">
+  {{yield (hash image=(component 'ui/ui-box/ui-box-image'))}}
+</div>
 
 --}}
