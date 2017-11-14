@@ -1,18 +1,12 @@
-{{!--
 <div class="card-header">
   <h5>
     {{yield (hash header=(component 'ui/ui-box/ui-box-header'))}}
   </h5>
 </div>
 
---}}
-
-<!-- Testing contextual component refactor  -->
 <div class="card-body {{content-modifier}}">
   {{yield (hash body=(component 'ui/ui-box/ui-box-body'))}}
 </div>
-
-{{!--
 
 <div class="card-footer">
   {{yield (hash footer=(component 'ui/ui-box/ui-box-footer'))}}
@@ -25,5 +19,4 @@
 <div class="card-thumbnail">
   {{yield (hash image=(component 'ui/ui-box/ui-box-image'))}}
 </div>
-
---}}
+q
