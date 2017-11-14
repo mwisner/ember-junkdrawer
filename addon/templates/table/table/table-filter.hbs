@@ -3,10 +3,19 @@
     {{#ui/ui-box}}
       {{#block-slot 'content'}}
         <div class="row">
-          <div class="col-md-9">
+          <div class="col-md-12">
             {{#bs-form onSubmit=(action "submit") formLayout="inline" model=recordQuery as |form|}}
               {{yield form}}
-              {{bs-button defaultText="Filter" type="primary" buttonType="submit"}}
+              <div class="filter-form-actions">
+                {{#if hasFiltered }}
+                  <a href="#" class="btn btn-secondary" {{action "reset"}}>
+                    {{fa-icon "times"}}
+                  </a>
+                {{/if}}
+
+                {{bs-button defaultText="Filter" type="primary" buttonType="submit"}}
+              </div>
+
             {{/bs-form}}
           </div>
         </div>

@@ -81,7 +81,6 @@ export default Component.extend({
    */
   actions: {
     onScrolledToBottom() {
-      console.log("eh?");
       if (this.get('canLoadMore')) {
         this.incrementProperty('page');
         this.get('fetchRecords').perform();
