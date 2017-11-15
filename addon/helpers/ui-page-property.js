@@ -18,11 +18,9 @@ function updatePageProperty(property, tokens) {
   }
 
   if (property === 'title') {
-    set(this, 'uiGlobal.pageTitleRaw', value);
+    set(this, 'uiGlobal.pageTitle', value);
   } else if (property === 'description') {
-    set(this, 'uiGlobal.pageDescriptionRaw', value);
-  } else if (property === 'actions') {
-    set(this, 'uiGlobal.pageActionsComponentRaw', value);
+    set(this, 'uiGlobal.pageDescription', value);
   }
 }
 
@@ -30,9 +28,8 @@ function updatePageProperty(property, tokens) {
  *
  */
 function clearPageProps() {
-  set(this, 'uiGlobal.pageDescriptionRaw', null);
-  set(this, 'uiGlobal.pageTitleRaw', null);
-  set(this, 'uiGlobal.pageActionsComponentRaw', null);
+  set(this, 'uiGlobal.pageDescription', null);
+  set(this, 'uiGlobal.pageTitle', null);
 }
 
 /**

@@ -1,30 +1,49 @@
+import Component from '@ember/component';
 import { oneWay } from '@ember/object/computed';
 import { assign } from '@ember/polyfills';
-import Mixin from '@ember/object/mixin';
 import { inject as service } from '@ember/service';
 import { isEmpty } from '@ember/utils';
 import Table from 'ember-light-table';
 import { task } from 'ember-concurrency';
+import { A } from "@ember/array";
+import { setProperties } from "@ember/object";
 
-export default Mixin.create({
+import layout from '../../templates/table/model-table';
+
+export default Component.extend({
+  layout,
   store: service(),
   page: 0,
-  page_size: 100,
+  page_size: 30,
   sort: 'name',
   recordType: null,
   recordQuery: {},
   isLoading: oneWay('fetchRecords.isRunning'),
   canLoadMore: true,
   enableSync: true,
-  model: null,
+  model: A([]),
   meta: null,
-  columns: null,
+  columns: [],
   table: null,
 
   /**
    *
    */
   init() {
+    this._super(...arguments);
+
+    this.setProperties({
+      table: null,
+      model: A([]),
+      canLoadMore: true,
+    });
+
+  },
+
+  /**
+   *
+   */
+  didReceiveAttrs() {
     this._super(...arguments);
 
     let table = new Table(this.get('columns'), this.get('model'), {
@@ -41,6 +60,7 @@ export default Mixin.create({
     }
 
     this.set('table', table);
+
   },
 
   /**
@@ -49,11 +69,19 @@ export default Mixin.create({
   fetchRecords: task(function*() {
     let query = this.getProperties(['page', 'page_size', 'sort']);
     query = assign(query, this.get('recordQuery'));
+    let records = yield this.get('store')
+      .query(this.get('recordType'), query)
+      .catch(data => {
+        return A([]);
+      });
 
-    let records = yield this.get('store').query(this.get('recordType'), query);
-    this.get('model').pushObjects(records.toArray());
-    this.set('meta', records.get('meta'));
-    this.set('canLoadMore', !isEmpty(records.get('meta').next));
+    if (records.get('length')) {
+      this.get('model').pushObjects(records.toArray());
+      this.set('canLoadMore', true);
+    } else {
+      this.set('canLoadMore', false);
+    }
+
   }).restartable(),
 
   /**
@@ -62,9 +90,10 @@ export default Mixin.create({
   resetTable() {
     this.setProperties({
       canLoadMore: true,
-      page: 0
+      page: 1,
     });
     this.get('model').clear();
+    this.get('fetchRecords').perform();
   },
 
   /**

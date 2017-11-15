@@ -62,7 +62,6 @@ export default Control.extend({
       .request('/file_manager/', { data: { type: type } })
       .then(response => {
         let upload_info = response.data;
-        console.log(upload_info);
         return upload_info;
       });
 
@@ -107,7 +106,7 @@ export default Control.extend({
         this.set('state', 'upload');
       }
     },
-    doneCropping(data) {
+    doneCropping() {
       let selector = '.cropper-wrapper  > .image-cropper > img';
       let container = this.$(selector).get(0);
       let cropper = container.cropper;
