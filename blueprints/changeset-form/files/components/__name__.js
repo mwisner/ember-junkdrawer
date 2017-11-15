@@ -6,5 +6,5 @@ import FormComponent from 'ember-junkdrawer/components/form/changeset-form';
 
 
 export default FormComponent.extend({
-
+  store: service(),
 });
