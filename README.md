@@ -1,6 +1,66 @@
 # ember-junkdrawer
-
 https://www.npr.org/sections/theprotojournalist/2014/08/15/337759135/what-your-junk-drawer-reveals-about-you
+
+## Install
+```bash
+ember install ember-junkdrawer
+```
+
+# Quick & Dirty Component Examples
+### Tables
+Template driven tables with support for filtering.
+
+```handlebars
+{{#table/model-table
+  dir=dir
+  sort=sort
+  columns=columns
+  recordType=recordType as |t| }}
+
+  {{#t.filter
+    defaultRecordQuery=defaultRecordQuery
+    preFilterAlter=(action "preFilterAlter")
+  as |filter|}}
+    {{filter.element label="Name" controlType="text" property="name__icontains"}}
+    {{filter.element label="Date Range" controlType="baremetrics" presets=dateFilterPresets property="daterange"}}
+  {{/t.filter}}
+
+{{/table/model-table}}
+```
+
+### Forms
+
+component.js:
+```js
+import { inject as service } from '@ember/service';
+import { computed, get } from '@ember/object';
+
+import FormComponent from 'ember-junkdrawer/components/form/changeset-form';
+import OrganizationValidations from '../../validators/organization';
+
+export default FormComponent.extend({
+  flashMessages: service(),
+
+  validator: OrganizationValidations,
+  model: computed(function() {
+    return get(this, 'organization');
+  }),
+
+  /**
+   * Success
+   */
+  onSubmitSuccess() {
+    get(this, 'flashMessages').success('Organization Updated');
+  },
+
+});
+```
+
+component.hbs
+```handlebars
+{{component/my-component organization=model}}
+```
+
 
 # Tree Shaking
 Use either blacklist or whitelist, not both.
