@@ -1,0 +1,10 @@
+{{#bs-form model=changeset onSubmit=(action "submit") as |form|}}
+  {{#ui/ui-card}}
+    {{#block-slot 'content'}}
+
+    {{/block-slot}}
+    {{#block-slot 'footer'}}
+      {{bs-button defaultText="Save" pendingText="Saving..." type="primary" buttonType="submit"}}
+    {{/block-slot}}
+  {{/ui/ui-card}}
+{{/bs-form}}
