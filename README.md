@@ -96,3 +96,10 @@ In your ember-cli-build.js:
 ## Custom Blueprint
 `ember g changeset-form <name>`: Generates the default `.hbs` and `.js` files for
 the changeset form.
+
+## Close Button
+At long last, our national nightmare of copying and pasting a close button is over.
+
+```hbs
+  {{close-button (action "myCloseActionName")}}
+```
