@@ -85,10 +85,11 @@ In your ember-cli-build.js:
 | Component  | component:thing-list  |
 | Component  | component:thing-list  |
 | Component  | component:ui-box  |
-| Component  | helper:ui-page-property  |
-| Component  | mixin:model-data-table-common  |
-| Component  | service:current-user  |
-| Component  | service:ui-global  |
+| Component  | compoennt:close-button |
+| Helper  | helper:ui-page-property  |
+| Mixin  | mixin:model-data-table-common  |
+| Service  | service:current-user  |
+| Service  | service:ui-global  |
 
 
 # Random Stuff

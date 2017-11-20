@@ -54,6 +54,8 @@ const fileMap = {
   'services/current-user.js': 'service:current-user',
   'services/ui-global.js': 'service:ui-global',
 
+  'components/close-button.js': 'component:close-button'
+
 };
 
 
