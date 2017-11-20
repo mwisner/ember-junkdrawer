@@ -89,3 +89,10 @@ In your ember-cli-build.js:
 | Component  | mixin:model-data-table-common  |
 | Component  | service:current-user  |
 | Component  | service:ui-global  |
+
+
+# Random Stuff
+
+## Custom Blueprint
+`ember g changeset-form <name>`: Generates the default `.hbs` and `.js` files for
+the changeset form.
