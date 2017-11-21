@@ -17,8 +17,7 @@ jobs:
                 name: Install node global dependencies
                 command: |
                   sudo npm install -g yarn \
-                    bower \
-                    ember-cli \
+                    ember-cli
 
             ##
             # NPM
@@ -32,19 +31,6 @@ jobs:
                 key: dependency-cache-{{ checksum "package.json" }}
                 paths:
                     - ./node_modules
-
-            ##
-            # BOWER
-            ##
-            - restore_cache:
-                key: dependency-cache-{{ checksum "bower.json" }}
-            - run:
-                name: Install bower dependencies
-                command: bower install
-            - save_cache:
-                  key: dependency-cache-{{ checksum "bower.json" }}
-                  paths:
-                      - ./bower_components
 
             ##
             # TESTS
