@@ -6,8 +6,8 @@
 
 <div class="row">
   <div class="col-md-12">
-    {{#ui/ui-box content-modifier="no-padding"}}
-      {{#block-slot 'content'}}
+    {{#ui/ui-box as |b|}}
+      {{#b.body classNames="no-padding"}}
         {{#if table }}
           {{#light-table table class="table" height='65vh' as |t|}}
             {{t.head
@@ -34,7 +34,7 @@
 
           {{/light-table}}
         {{/if}}
-      {{/block-slot}}
+      {{/b.body}}
     {{/ui/ui-box}}
   </div>
 </div>

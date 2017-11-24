@@ -1,7 +1,7 @@
-import Service, { inject as service } from '@ember/service';
-import { computed, set, get } from '@ember/object';
-import { assert } from '@ember/debug';
-import { task } from 'ember-concurrency';
+import Service, {inject as service} from '@ember/service';
+import {computed, set, get} from '@ember/object';
+import {assert} from '@ember/debug';
+import {task} from 'ember-concurrency';
 
 /**
  * Current user service.
@@ -24,24 +24,24 @@ export default Service.extend({
   organizations: null,
   currentOrganization: null,
 
-  user: computed('currentUser', function() {
+  user: computed('currentUser', function () {
     return this.get('currentUser');
   }),
 
-  user_id: computed('currentUser', function() {
+  user_id: computed('currentUser', function () {
     return this.get('currentUser.id');
   }),
 
-  organization: computed('currentOrganization', function() {
+  organization: computed('currentOrganization', function () {
     return this.get('currentOrganization');
   }),
 
   /**
    * Task / Load User
    */
-  loadUser: task(function*() {
+  loadUser: task(function* () {
     return yield this.get('store')
-      .query('user', { current: true })
+      .query('user', {current: true})
       .then(users => {
         const user = users.get('firstObject');
         set(this, 'currentUser', user);
@@ -55,7 +55,7 @@ export default Service.extend({
   /**
    * Task / Load Organizations
    */
-  loadOrganizations: task(function*() {
+  loadOrganizations: task(function* () {
     let organizations = yield get(this, 'currentUser.organizations');
     set(this, 'organizations', organizations);
     return organizations;
@@ -64,15 +64,20 @@ export default Service.extend({
   /**
    * Set the initial active organization.
    */
-  setActiveOrganization: task(function*() {
+  setActiveOrganization: task(function* () {
     let organizations = yield this.get('organizations');
     if (!organizations.length) {
       return null;
     }
 
+    //
+    // Find recommended organization id.
     let currentOrganizationId = this.get('session').get(
       'data.currentOrganizationId'
     );
+
+    //
+    // If we don't have a stored id, load the first one.
     if (!currentOrganizationId) {
       let organization = organizations.get('firstObject');
       set(this, 'currentOrganization', organization);
@@ -81,23 +86,39 @@ export default Service.extend({
         organization.get('id')
       );
       return organization;
-    } else {
-      let organization = organizations.findBy('id', currentOrganizationId);
-      if (organization) {
-        set(this, 'currentOrganization', organization);
-        return organization;
-      } else {
-        let organization = organizations.get('firstObject');
-        set(this, 'currentOrganization', organization);
-        return organization;
-      }
     }
+
+    //
+    // First we attempt to load based on the user.organizations attribute.
+    // In most situations the id will be part of this list. However in the situation
+    // that the user is an admin, and attempting to impersonate access, we allow in this situation
+    // to load the organization. It's the responsibility of the API to ensure that the user
+    // can access organizations in this situation.
+    let organization = organizations.findBy('id', currentOrganizationId);
+    if (organization) {
+      set(this, 'currentOrganization', organization);
+      return organization;
+    } else {
+      return yield this.get('store')
+        .findRecord('organization', currentOrganizationId)
+        .then(data => {
+          set(this, 'currentOrganization', data);
+          return data;
+        })
+        .catch(data => {
+          // Load user's default organization.
+          let organization = organizations.get('firstObject');
+          set(this, 'currentOrganization', organization);
+          return organization;
+        });
+    }
+
   }).drop(),
 
   /**
    * Ran after user has logged in.
    */
-  userLogin: task(function*() {
+  userLogin: task(function* () {
     if (!this.get('currentUser')) {
       yield this.get('setupEverything').perform();
     }
@@ -122,7 +143,7 @@ export default Service.extend({
       .login(payload)
       .then(() => {
         return this.get('store')
-          .findRecord('user', this.get('user.id'), { reload: true })
+          .findRecord('user', this.get('user.id'), {reload: true})
           .then(user => {
             this.set('currentUser', user);
 
@@ -147,7 +168,7 @@ export default Service.extend({
    * 4) Select Active Organization
    * 5) Set Organization Features
    */
-  setupEverything: task(function*() {
+  setupEverything: task(function* () {
     //
     // Load Current User
     const user = yield this.get('loadUser').perform();
@@ -225,7 +246,8 @@ export default Service.extend({
    * Set User Features
    * @private
    */
-  _set_user_features() {},
+  _set_user_features() {
+  },
 
   /**
    * Set Intercom Data
