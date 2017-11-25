@@ -105,7 +105,7 @@ export default Service.extend({
           set(this, 'currentOrganization', data);
           return data;
         })
-        .catch(data => {
+        .catch(() => {
           // Load user's default organization.
           let organization = organizations.get('firstObject');
           set(this, 'currentOrganization', organization);
@@ -177,7 +177,8 @@ export default Service.extend({
     }
     this._set_user_features();
     this._set_intercom_data();
-
+    
+    this.didSetupUser(user);
     //
     // Load Organizations
     const organizations = yield this.get('loadOrganizations').perform();
@@ -185,8 +186,11 @@ export default Service.extend({
       const organization = yield this.get('setActiveOrganization').perform();
       if (organization) {
         this._set_organization_features();
+        this.didSetupOrganization(organization);
       }
     }
+
+    
 
     return true;
   }).drop(),
@@ -264,6 +268,22 @@ export default Service.extend({
   },
 
   /**
+   * Hook to setup user
+   * Noop without user implementation
+   * @public
+   * @param {*} user 
+   */
+   didSetupUser() {},
+
+   /**
+    * Hook to setup organization
+    * Noop without user implmentation
+    * @public
+    * @param {*} organization 
+    */
+   didSetupOrganization() {},
+
+  /**
    * @private
    * Set Organization Features
    */
@@ -294,23 +314,4 @@ export default Service.extend({
     }
   },
 
-  /**
-   * List of pre-approved events for intercom event tracking
-   */
-  eventList: ['testEvent'],
-
-  /**
-   * Track an event in intercom
-   * @public
-   * @param event
-   * @param args
-   */
-  trigger(event, args) {
-    assert(
-      'Must use pre-approved event, please do not create your own',
-      get(this, 'eventList').includes(event)
-    );
-
-    get(this, 'intercom').trackEvent(event, args);
-  }
 });
