@@ -85,12 +85,12 @@ export default Component.extend({
    *
    */
   buttonState: alias('formState'),
-
   /**
    * Can be used to disable buttons to help prevent double click.
    */
   formSubmitButtonDisabled: equal('formState', 'pending'),
-
+  disableSubmit: alias('formSubmitButtonDisabled'),
+  
   /**
    * When a form is first submitted, disable the state and whatnot.
    * state should either be pending or default
@@ -132,6 +132,7 @@ export default Component.extend({
     }
   },
   /**
+   * @private
    * We use concurrency to help prevent quick duplicate form submission.
    */
   submit: task(function* (changeset) {

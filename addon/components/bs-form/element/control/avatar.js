@@ -1,6 +1,7 @@
 import { next } from '@ember/runloop';
 import { inject as service } from '@ember/service';
 import { get, computed } from '@ember/object';
+import {equal} from '@ember/object/computed';
 
 import Control from 'ember-bootstrap/components/bs-form/element/control';
 
@@ -42,13 +43,7 @@ export default Control.extend({
    */
   state: 'default',
 
-  cropModalOpen: computed('state', function() {
-    if (this.get('state') === 'crop') {
-      return true;
-    } else {
-      return false;
-    }
-  }),
+  cropModalOpen: equal('state', 'crop'),
 
   /**
    * Task to upload files
