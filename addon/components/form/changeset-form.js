@@ -47,7 +47,15 @@ export default Component.extend({
    */
   didReceiveAttrs() {
     this._super(...arguments);
+    this.initFormData();
+    assert('You must implement a `changeset` property', get(this, 'changeset'));
+    assert('You must provide a valid `model` property', get(this, 'model'));
+  },
 
+  /**
+   * Init Models
+   */
+  initFormData() {
     //
     // Build Changeset
     if (this.get('model')) {
@@ -70,10 +78,8 @@ export default Component.extend({
     if (!this.get('changeset')) {
       this.initModel();
     }
-
-    assert('You must implement a `changeset` property', get(this, 'changeset'));
-    assert('You must provide a valid `model` property', get(this, 'model'));
   },
+
 
   /**
    * default: form is clean and hasn't been submitted
@@ -135,7 +141,7 @@ export default Component.extend({
    * We use concurrency to help prevent quick duplicate form submission.
    */
   submit: task(function* (changeset) {
-    yield changeset
+    return yield changeset
       .save()
       .then(data => {
         this.onSubmitSuccess(data);
