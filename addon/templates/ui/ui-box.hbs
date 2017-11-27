@@ -1,34 +1,9 @@
-{{yield}}
+{{yield (hash header=(component 'ui/ui-box/ui-box-header'))}}
 
-{{#yield-slot 'image'}}
-  <div class="card-thumbnail">
-    {{yield}}
-  </div>
-{{/yield-slot}}
+{{yield (hash body=(component 'ui/ui-box/ui-box-body'))}}
 
-{{#yield-slot 'title'}}
-  <div class="card-header">
-    <h5>{{yield}}</h5>
-  </div>
-{{/yield-slot}}
+{{yield (hash footer=(component 'ui/ui-box/ui-box-footer'))}}
 
+{{yield (hash list=(component 'ui/ui-box/ui-box-list'))}}
 
-{{#yield-slot 'content'}}
-  <div class="card-body {{content-modifier}}">
-    {{yield}}
-  </div>
-{{/yield-slot}}
-
-
-{{#yield-slot 'list'}}
-  <ul class="list-group list-group-flush">
-    {{yield}}
-  </ul>
-{{/yield-slot}}
-
-
-{{#yield-slot 'footer'}}
-  <div class="card-footer">
-    {{yield}}
-  </div>
-{{/yield-slot}}
+{{yield (hash image=(component 'ui/ui-box/ui-box-image'))}}

@@ -56,10 +56,32 @@ export default FormComponent.extend({
 });
 ```
 
-component.hbs
+component.hbs:
 ```handlebars
 {{component/my-component organization=model}}
 ```
+
+### UI Box
+component.hbs:
+```handlebars
+{{#ui/ui-box as |b|}}
+
+  {{#b.header}}
+    Create New Organization
+  {{/b.header}}
+    
+  {{#b.body classNames="no-padding"}}
+    {{form.element label="Organization Name" controlType="text" property="name"}}
+  {{/b.body}}
+
+  {{#b.footer}}
+    {{bs-button defaultText="Create Organization" pendingText="Saving..." buttonType="submit"}}
+  {{/b.footer}}
+    
+{{/ui/ui-box}}
+```
+Set `classNames` to pass modifier classes to the component.
+Set `tagName` to override the component's default element.
 
 
 # Tree Shaking

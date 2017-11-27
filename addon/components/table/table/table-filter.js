@@ -39,7 +39,7 @@ export default Component.extend({
   },
 
   actions: {
-    submit: function (query) {
+    submit(query) {
 
       if (this.get('preFilterAlter')) {
         query = this.get('preFilterAlter')(query);
