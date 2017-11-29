@@ -4,7 +4,7 @@ import {assert} from '@ember/debug';
 import {task} from 'ember-concurrency';
 import config from 'ember-get-config';
 import {alias} from '@ember/object/computed';
-
+import {getOwner} from '@ember/application';
 
 /**
  * Current user service.
@@ -22,29 +22,40 @@ export default Service.extend({
     this._super(...arguments);
     let config = getOwner(this).resolveRegistration('config:environment');
     set(this, 'config', config['ember-junkdrawer']);
-
-    if (get(this, 'enableFeatures')) {
-      this.features = service();
-    }
-
-    if get(this, 'enableIntercom') {
-      this.intercom = service()
-    }
-
-    if get(this, 'enableFlashMessages') {
-      this.flashMessages = service();
-    }
   },
 
-  enableFetures: computed('config', function() {
-    return !!getWithDefault('config.enableFeatures', true);
+
+  enableFeatures: computed('config', function() {
+    return !!getWithDefault(this, 'config.enableFeatures', true);
   }),
   enableIntercom: computed('config', function() {
-    return !!getWithDefault('config.enableIntercom', true);
+    return !!getWithDefault(this, 'config.enableIntercom', true);
   }),
   enableFlashMessages: computed('config', function() {
-    return !!getWithDefault('config.enableFlashMessages', true);
-  })
+    return !!getWithDefault(this, 'config.enableFlashMessages', true);
+  }),
+
+  intercom: computed('config', function() {
+    if (get(this, 'enableIntercom')) {
+      return getOwner(this).lookup('service:intercom');
+    } else {
+      return null;
+    }
+  }),
+  features: computed('config', function() {
+    if (get(this, 'enableFeatures')) {
+      return getOwner(this).lookup('service:features');
+    } else {
+      return null;
+    }
+  }),
+  flashMessages: computed('config', function() {
+    if (get(this, 'enableFlashMessages')) {
+      return getOwner(this).lookup('service:flashMessages')
+    } else {
+      return null;
+    }
+  }),
 
 
   initAppTask: null,
@@ -255,9 +266,11 @@ export default Service.extend({
       .then(() => {
         if (!this.get('user')) {
           this.get('session').invalidate();
-          this.get('flashMessages').danger(
-            'An error occurred loading your account.'
-          );
+          if (get(this, 'enableFlashMessages')) {
+            this.get('flashMessages').danger(
+              'An error occurred loading your account.'
+            );
+          }
           this.get('router').transitionTo('anon.login');
         }
       });
@@ -280,6 +293,9 @@ export default Service.extend({
    * @private
    */
   _set_user_features() {
+    if (!get(this, 'enableFeatures')) {
+      return false;
+    }
   },
 
   /**
@@ -287,6 +303,9 @@ export default Service.extend({
    * @private
    */
   _set_intercom_data() {
+    if (!get(this, 'enableIntercom')) {
+      return false;
+    }
     let intercomData = {
       name: this.get('currentUser.name'),
       email: this.get('currentUser.username'),
@@ -319,6 +338,9 @@ export default Service.extend({
   _set_organization_features() {
     //
     // Set organization features.
+    if (!get(this, 'enableFeatures')) {
+      return false;
+    }
     if (
       this.get('currentOrganization.features') &&
       this.get('currentOrganization.features').length
