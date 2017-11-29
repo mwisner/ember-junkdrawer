@@ -1,7 +1,10 @@
 import Service, {inject as service} from '@ember/service';
-import {computed, set, get} from '@ember/object';
+import {computed, set, get, getWithDefault} from '@ember/object';
 import {assert} from '@ember/debug';
 import {task} from 'ember-concurrency';
+import config from 'ember-get-config';
+import {alias} from '@ember/object/computed';
+
 
 /**
  * Current user service.
@@ -14,9 +17,35 @@ export default Service.extend({
   router: service(),
   session: service(),
   store: service(),
-  features: service(),
-  intercom: service(),
-  flashMessages: service(),
+
+  init() {
+    this._super(...arguments);
+    let config = getOwner(this).resolveRegistration('config:environment');
+    set(this, 'config', config['ember-junkdrawer']);
+
+    if (get(this, 'enableFeatures')) {
+      this.features = service();
+    }
+
+    if get(this, 'enableIntercom') {
+      this.intercom = service()
+    }
+
+    if get(this, 'enableFlashMessages') {
+      this.flashMessages = service();
+    }
+  },
+
+  enableFetures: computed('config', function() {
+    return !!getWithDefault('config.enableFeatures', true);
+  }),
+  enableIntercom: computed('config', function() {
+    return !!getWithDefault('config.enableIntercom', true);
+  }),
+  enableFlashMessages: computed('config', function() {
+    return !!getWithDefault('config.enableFlashMessages', true);
+  })
+
 
   initAppTask: null,
 
@@ -177,7 +206,7 @@ export default Service.extend({
     }
     this._set_user_features();
     this._set_intercom_data();
-    
+
     this.didSetupUser(user);
     //
     // Load Organizations
@@ -190,7 +219,7 @@ export default Service.extend({
       }
     }
 
-    
+
 
     return true;
   }).drop(),
@@ -271,7 +300,7 @@ export default Service.extend({
    * Hook to setup user
    * Noop without user implementation
    * @public
-   * @param {*} user 
+   * @param {*} user
    */
    didSetupUser() {},
 
@@ -279,7 +308,7 @@ export default Service.extend({
     * Hook to setup organization
     * Noop without user implmentation
     * @public
-    * @param {*} organization 
+    * @param {*} organization
     */
    didSetupOrganization() {},
 
