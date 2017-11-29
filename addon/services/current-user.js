@@ -9,9 +9,6 @@ import {getOwner} from '@ember/application';
 /**
  * Current user service.
  *
- * TODO:
- * -- Make route transitions configurable / optional
- * -- Make Feature setting configurable / optional
  */
 export default Service.extend({
   router: service(),
@@ -271,6 +268,7 @@ export default Service.extend({
               'An error occurred loading your account.'
             );
           }
+          get(this, 'didUserLoadError')();
           this.get('router').transitionTo('anon.login');
         }
       });
@@ -330,6 +328,12 @@ export default Service.extend({
     * @param {*} organization
     */
    didSetupOrganization() {},
+
+   /**
+    * Hook to respond to possible user loading errors
+    * @return {[type]} [description]
+    */
+   didUserLoadError(){},
 
   /**
    * @private
