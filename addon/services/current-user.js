@@ -1,22 +1,59 @@
 import Service, {inject as service} from '@ember/service';
-import {computed, set, get} from '@ember/object';
+import {computed, set, get, getWithDefault} from '@ember/object';
 import {assert} from '@ember/debug';
 import {task} from 'ember-concurrency';
+import config from 'ember-get-config';
+import {alias} from '@ember/object/computed';
+import {getOwner} from '@ember/application';
 
 /**
  * Current user service.
  *
- * TODO:
- * -- Make route transitions configurable / optional
- * -- Make Feature setting configurable / optional
  */
 export default Service.extend({
   router: service(),
   session: service(),
   store: service(),
-  features: service(),
-  intercom: service(),
-  flashMessages: service(),
+
+  init() {
+    this._super(...arguments);
+    let config = getOwner(this).resolveRegistration('config:environment');
+    set(this, 'config', config['ember-junkdrawer']);
+  },
+
+
+  enableFeatures: computed('config', function() {
+    return !!getWithDefault(this, 'config.enableFeatures', true);
+  }),
+  enableIntercom: computed('config', function() {
+    return !!getWithDefault(this, 'config.enableIntercom', true);
+  }),
+  enableFlashMessages: computed('config', function() {
+    return !!getWithDefault(this, 'config.enableFlashMessages', true);
+  }),
+
+  intercom: computed('config', function() {
+    if (get(this, 'enableIntercom')) {
+      return getOwner(this).lookup('service:intercom');
+    } else {
+      return null;
+    }
+  }),
+  features: computed('config', function() {
+    if (get(this, 'enableFeatures')) {
+      return getOwner(this).lookup('service:features');
+    } else {
+      return null;
+    }
+  }),
+  flashMessages: computed('config', function() {
+    if (get(this, 'enableFlashMessages')) {
+      return getOwner(this).lookup('service:flashMessages')
+    } else {
+      return null;
+    }
+  }),
+
 
   initAppTask: null,
 
@@ -177,7 +214,7 @@ export default Service.extend({
     }
     this._set_user_features();
     this._set_intercom_data();
-    
+
     this.didSetupUser(user);
     //
     // Load Organizations
@@ -190,7 +227,7 @@ export default Service.extend({
       }
     }
 
-    
+
 
     return true;
   }).drop(),
@@ -226,9 +263,12 @@ export default Service.extend({
       .then(() => {
         if (!this.get('user')) {
           this.get('session').invalidate();
-          this.get('flashMessages').danger(
-            'An error occurred loading your account.'
-          );
+          if (get(this, 'enableFlashMessages')) {
+            this.get('flashMessages').danger(
+              'An error occurred loading your account.'
+            );
+          }
+          get(this, 'didUserLoadError')();
           this.get('router').transitionTo('anon.login');
         }
       });
@@ -251,6 +291,9 @@ export default Service.extend({
    * @private
    */
   _set_user_features() {
+    if (!get(this, 'enableFeatures')) {
+      return false;
+    }
   },
 
   /**
@@ -258,6 +301,9 @@ export default Service.extend({
    * @private
    */
   _set_intercom_data() {
+    if (!get(this, 'enableIntercom')) {
+      return false;
+    }
     let intercomData = {
       name: this.get('currentUser.name'),
       email: this.get('currentUser.username'),
@@ -271,7 +317,7 @@ export default Service.extend({
    * Hook to setup user
    * Noop without user implementation
    * @public
-   * @param {*} user 
+   * @param {*} user
    */
    didSetupUser() {},
 
@@ -279,9 +325,15 @@ export default Service.extend({
     * Hook to setup organization
     * Noop without user implmentation
     * @public
-    * @param {*} organization 
+    * @param {*} organization
     */
    didSetupOrganization() {},
+
+   /**
+    * Hook to respond to possible user loading errors
+    * @return {[type]} [description]
+    */
+   didUserLoadError(){},
 
   /**
    * @private
@@ -290,6 +342,9 @@ export default Service.extend({
   _set_organization_features() {
     //
     // Set organization features.
+    if (!get(this, 'enableFeatures')) {
+      return false;
+    }
     if (
       this.get('currentOrganization.features') &&
       this.get('currentOrganization.features').length

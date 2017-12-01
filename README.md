@@ -69,7 +69,7 @@ component.hbs:
   {{#b.header}}
     Create New Organization
   {{/b.header}}
-    
+
   {{#b.body classNames="no-padding"}}
     {{form.element label="Organization Name" controlType="text" property="name"}}
   {{/b.body}}
@@ -77,7 +77,7 @@ component.hbs:
   {{#b.footer}}
     {{bs-button defaultText="Create Organization" pendingText="Saving..." buttonType="submit"}}
   {{/b.footer}}
-    
+
 {{/ui/ui-box}}
 ```
 Set `classNames` to pass modifier classes to the component.
@@ -125,4 +125,37 @@ At long last, our national nightmare of copying and pasting a close button is ov
 
 ```hbs
   {{close-button (action "myCloseActionName")}}
+```
+
+## Current User Service
+The `ember-junkdrawer` current user service provides lots of helpful functionality
+for getting the current user via ember-concurrency tasks.
+
+Requirements:
+**You must** have an endpoint to fetch the current user at `/users/?current=true`.
+That endpoint should serialize with your store's user object.
+
+By default, the CurrentUser service will push data to `ember-intercom`. Don't wan't that? You can opt out at anytime:
+
+### Configuration
+
+```js
+//environment.js
+ENV['ember-junkdrawer'] = {
+  enableFeatures: false,
+  enableIntercom: false,
+  enableFlashMessages: false
+}
+```
+
+If your app doesn't include those, it won't inject them.
+
+### Hooks
+This addon exposes three hooks you can use to implement in your own. You can use the default
+generator to extend the provided service `ember generate current-user <your service>`.
+
+```js
+didSetupUser(user) {},
+didSetupOrganization(organization) {},
+didUserLoadError(){}
 ```

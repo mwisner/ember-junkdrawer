@@ -1,6 +1,7 @@
 /* eslint-env node */
 module.exports = {
-  description: ''
+  name: 'current-user',
+  description: 'extend ember-junk drawer\'s currentUser service'
 
   // locals(options) {
   //   // Return custom template variables here.

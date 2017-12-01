@@ -1,6 +1,7 @@
 /* eslint-env node */
 module.exports = {
-  description: ''
+  name: 'changeset-form',
+  description: 'generate component wtih changeset form details'
 
   // locals(options) {
   //   // Return custom template variables here.
