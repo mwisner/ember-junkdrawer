@@ -7,7 +7,7 @@ ember install ember-junkdrawer
 ```
 
 # Quick & Dirty Component Examples
-### Tables
+## Tables
 Template driven tables with support for filtering.
 
 ```handlebars
@@ -28,7 +28,7 @@ Template driven tables with support for filtering.
 {{/table/model-table}}
 ```
 
-### Forms
+## Forms
 
 component.js:
 ```js
@@ -56,12 +56,30 @@ export default FormComponent.extend({
 });
 ```
 
+### Form Controls
+This addon provides two custom form controls: Baremetrics Calendar and Avatar.
+Avatar is a custom upload type with configurable in-browser image cropping.
+
+```handlebars
+{{#bs-form model=changeset onSubmit=(action "submit") as |form|}}
+  {{#ui/ui-box as |b|}}
+    {{#b.body}}
+      {{form.element controlType="avatar" property="logoPropertyName"}}
+      {{form.element controlType="baremetrics" property="dateRange" options=(hash presets=presets)}}
+    {{/b.body}}
+  {{/ui/ui-box}}
+{{/bs-form}}
+```
+
+The baremetrics calendar element takes a hash of `options` that is the same hash available to pass
+to [Baremetrics Calendar](https://github.com/davewasmer/ember-baremetrics-calendar/pull/12)
+
 component.hbs:
 ```handlebars
 {{component/my-component organization=model}}
 ```
 
-### UI Box
+## UI Box
 component.hbs:
 ```handlebars
 {{#ui/ui-box as |b|}}
