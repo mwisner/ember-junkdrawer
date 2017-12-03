@@ -1,5 +1,11 @@
 {{baremetrics-calendar
   startDate=value.startDate
   endDate=value.endDate
-  presets=presets
+  presets=options.presets
+  earliestDate=options.earliestDate
+  latestDate=options.latestDate
+  searchEnabled=options.searchEnabled
+  jumpMonthFormat=options.jumpMonthFormat
+  jumpYearFormat=options.jumpYearFormat
+  presetFormat=options.presetFormat
   onchange=(action 'updateValue')}}
