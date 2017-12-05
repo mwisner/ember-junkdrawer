@@ -101,6 +101,32 @@ component.hbs:
 Set `classNames` to pass modifier classes to the component.
 Set `tagName` to override the component's default element.
 
+## Bootstrap Extras
+The great [Ember Bootstrap](http://www.ember-bootstrap.com/) addon provides a lot of great functionality.
+This addon provides some useful items outside the scope for the more general purpose addon.
+
+### Close Button
+At long last, our national nightmare of copying and pasting a close button is over.
+
+```hbs
+  {{close-button (action "myCloseActionName")}}
+```
+
+### List Groups
+Bootstrap list groups require too much boilerplate html. We provide a configurable set
+of components to create groups.
+
+```hbs
+  {{#bs/list-group as |g|}}
+    {{g.item text="inline text"}}
+    {{#g.item tagName="div" active=isActive disabled=isDisabled type="danger"}}
+      Blocks work too, with custom properties!
+    {{/#g.item}}
+    {{#g.action onClick=(action "myAction")}}
+      Clickable as a button
+    {{/g.action}}
+  {{/bs/list-group}}
+```
 
 # Tree Shaking
 Use either blacklist or whitelist, not both.
@@ -137,13 +163,6 @@ In your ember-cli-build.js:
 ## Custom Blueprint
 `ember g changeset-form <name>`: Generates the default `.hbs` and `.js` files for
 the changeset form.
-
-## Close Button
-At long last, our national nightmare of copying and pasting a close button is over.
-
-```hbs
-  {{close-button (action "myCloseActionName")}}
-```
 
 ## Current User Service
 The `ember-junkdrawer` current user service provides lots of helpful functionality
