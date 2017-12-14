@@ -112,6 +112,15 @@ At long last, our national nightmare of copying and pasting a close button is ov
   {{close-button (action "myCloseActionName")}}
 ```
 
+### Link-Button
+Typing `btn btn-default` over and over again? SAD! It's the same arguments as `{{link-to}}`
+with an additional optional `type` param (defaults to `primary`). [See Ember Bootstrap {{#bs-button}}](http://www.ember-bootstrap.com/#/components/button)
+
+```hbs
+  {{#bs/link-button "posts.post" post.id type="primary"}}Read Post{{/bs/link-button}}
+```
+
+
 ### List Groups
 Bootstrap list groups require too much boilerplate html. We provide a configurable set
 of components to create groups.
