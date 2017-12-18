@@ -1,1 +1,1 @@
-export { default } from 'ember-junkdrawer/components/bs/button-link';
+export { default } from 'ember-junkdrawer/components/bs/link-button';
