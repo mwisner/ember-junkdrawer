@@ -66,6 +66,7 @@ Avatar is a custom upload type with configurable in-browser image cropping.
     {{#b.body}}
       {{form.element controlType="avatar" property="logoPropertyName"}}
       {{form.element controlType="baremetrics" property="dateRange" options=(hash presets=presets)}}
+      {{form.element controlType="x-toggle" property="active" options=(hash theme="light")}}
     {{/b.body}}
   {{/ui/ui-box}}
 {{/bs-form}}
