@@ -1,5 +1,5 @@
 import Component from '@ember/component';
-import {get, set, computed} from '@ember/object';
+import {get, computed} from '@ember/object';
 import layout from '../../../templates/components/bs/-list-group/lg-item';
 
 export default Component.extend({
