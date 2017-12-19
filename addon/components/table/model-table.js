@@ -2,11 +2,9 @@ import Component from '@ember/component';
 import { oneWay } from '@ember/object/computed';
 import { assign } from '@ember/polyfills';
 import { inject as service } from '@ember/service';
-import { isEmpty } from '@ember/utils';
 import Table from 'ember-light-table';
 import { task } from 'ember-concurrency';
 import { A } from "@ember/array";
-import { setProperties } from "@ember/object";
 
 import layout from '../../templates/table/model-table';
 
@@ -71,7 +69,7 @@ export default Component.extend({
     query = assign(query, this.get('recordQuery'));
     let records = yield this.get('store')
       .query(this.get('recordType'), query)
-      .catch(data => {
+      .catch(() => {
         return A([]);
       });
 

@@ -1,6 +1,6 @@
 import { next } from '@ember/runloop';
 import { inject as service } from '@ember/service';
-import { get, computed } from '@ember/object';
+import { get } from '@ember/object';
 import {equal} from '@ember/object/computed';
 
 import Control from 'ember-bootstrap/components/bs-form/element/control';

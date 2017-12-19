@@ -1,9 +1,6 @@
 import Service, {inject as service} from '@ember/service';
 import {computed, set, get, getWithDefault} from '@ember/object';
-import {assert} from '@ember/debug';
 import {task} from 'ember-concurrency';
-import config from 'ember-get-config';
-import {alias} from '@ember/object/computed';
 import {getOwner} from '@ember/application';
 
 /**
