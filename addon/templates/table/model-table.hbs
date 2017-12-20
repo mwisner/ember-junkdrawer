@@ -1,15 +1,12 @@
-{{yield (hash
-          filter=(component 'table/table/table-filter'
-            parentComponent=this
-          )
-        )}}
+{{yield (hash filter=(component 'table/table/table-filter' parentComponent=this))}}
 
 <div class="row">
   <div class="col-md-12">
     {{#ui/ui-box as |b|}}
+      {{yield (hash boxHeader=b.header)}}
       {{#b.body classNames="no-padding"}}
         {{#if table }}
-          {{#light-table table class="table" height='65vh' as |t|}}
+          {{#light-table table class="table" height=internalTableOptions.height as |t|}}
             {{t.head
               onColumnClick=(action 'onColumnClick')
               iconAscending='fa fa-sort-asc'
@@ -18,23 +15,25 @@
             }}
 
             {{#t.body
-              canSelect=false
-              expandOnClick=false
+              canSelect=internalTableOptions.canSelect
+              expandOnClick=internalTableOptions.expandOnClick
 
               onScrolledToBottom=(action 'onScrolledToBottom')
-            as |body|
-            }}
+            as |body| }}
 
               {{#if isLoading}}
+
                 {{#body.loader}}
                   {{table/table-loader}}
                 {{/body.loader}}
+
               {{/if}}
             {{/t.body}}
 
           {{/light-table}}
         {{/if}}
       {{/b.body}}
+      {{yield (hash boxFooter=b.footer)}}
     {{/ui/ui-box}}
   </div>
 </div>
