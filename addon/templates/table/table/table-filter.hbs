@@ -4,9 +4,9 @@
       {{#b.body}}
         <div class="row">
           <div class="col-md-12">
-            {{#bs-form onSubmit=(action "submit") formLayout="inline" model=recordQuery as |form|}}
+            {{#bs-form class="table-filters" onSubmit=(action "submit") formLayout="inline" model=recordQuery as |form|}}
               {{yield form}}
-              <div class="filter-form-actions">
+              <div class="table-filters-actions">
                 {{#if hasFiltered }}
                   <a href="#" class="btn btn-secondary" {{action "reset"}}>
                     {{fa-icon "times"}}

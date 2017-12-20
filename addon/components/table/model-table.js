@@ -1,4 +1,5 @@
 import Component from '@ember/component';
+import { computed } from '@ember/object';
 import { oneWay } from '@ember/object/computed';
 import { assign } from '@ember/polyfills';
 import { inject as service } from '@ember/service';
@@ -16,6 +17,7 @@ export default Component.extend({
   sort: 'name',
   recordType: null,
   recordQuery: {},
+  defaultRecordQuery: {},
   isLoading: oneWay('fetchRecords.isRunning'),
   canLoadMore: true,
   enableSync: true,
@@ -23,13 +25,25 @@ export default Component.extend({
   meta: null,
   columns: [],
   table: null,
+  tableOptions: {},
+  internalTableOptions: computed('tableOptions', function() {
+
+    let defaults = {
+      height: '65vh',
+      canSelect: false,
+      expandOnClick: false,
+    };
+
+    return Object.assign(defaults, this.get('tableOptions'));
+  }),
+
+  postTableSetup: null,
 
   /**
    *
    */
   init() {
     this._super(...arguments);
-
     this.setProperties({
       table: null,
       model: A([]),
@@ -58,7 +72,9 @@ export default Component.extend({
     }
 
     this.set('table', table);
-
+    if (this.get('postTableSetup')) {
+      this.get('postTableSetup')(table);
+    }
   },
 
   /**
