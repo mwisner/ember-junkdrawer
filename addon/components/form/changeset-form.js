@@ -56,6 +56,7 @@ export default Component.extend({
    * Init Models
    */
   initFormData() {
+
     //
     // Build Changeset
     if (this.get('model')) {
@@ -74,33 +75,19 @@ export default Component.extend({
       this.set('changeset', changeset);
     }
 
-    // Keep for legacy loading
+    // Deprecated
     if (!this.get('changeset')) {
       this.initModel();
     }
   },
 
-
   /**
-   * default: form is clean and hasn't been submitted
-   * pending: form has been submitted and is waiting for a server response
+   * Deprecated. use the derived submit task state.
    */
   formState: 'default',
-
-  /**
-   *
-   */
   buttonState: alias('formState'),
-  /**
-   * Can be used to disable buttons to help prevent double click.
-   */
   formSubmitButtonDisabled: equal('formState', 'pending'),
   disableSubmit: alias('formSubmitButtonDisabled'),
-  
-  /**
-   * When a form is first submitted, disable the state and whatnot.
-   * state should either be pending or default
-   */
   setFormState(state) {
     this.set('formState', state);
   },
@@ -128,15 +115,8 @@ export default Component.extend({
       }
     }
   },
-  /**
-   * Destroy model if it's sitting around un-saved by the time the compnent is torn down
-   */
-  willDestroyElement() {
-    this._super(...arguments);
-    if (get(this, 'model.isNew')) {
-      this.get('model').deleteRecord();
-    }
-  },
+
+
   /**
    * @private
    * We use concurrency to help prevent quick duplicate form submission.
@@ -151,8 +131,19 @@ export default Component.extend({
         this.handleServerFormErrors(data);
         this.setFormState('default');
         this.onServerError(data);
+        throw data;
       });
   }).drop(),
+
+  /**
+   * Destroy model if it's sitting around un-saved by the time the component is torn down
+   */
+  willDestroyElement() {
+    this._super(...arguments);
+    if (get(this, 'model.isNew')) {
+      this.get('model').deleteRecord();
+    }
+  },
 
   actions: {
     /**
@@ -164,6 +155,7 @@ export default Component.extend({
       if (!changeset.get('isDirty')) {
         return false;
       }
+      // Deprecated.
       this.setFormState('pending');
       return this.get('submit').perform(changeset);
     }
