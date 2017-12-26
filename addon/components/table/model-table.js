@@ -32,6 +32,7 @@ export default Component.extend({
       height: '65vh',
       canSelect: false,
       expandOnClick: false,
+      responsive: false,
     };
 
     return Object.assign(defaults, this.get('tableOptions'));
@@ -110,10 +111,11 @@ export default Component.extend({
     this.get('fetchRecords').perform();
   },
 
-  /**
-   *
-   */
   actions: {
+
+    /**
+     *
+     */
     onScrolledToBottom() {
       if (this.get('canLoadMore')) {
         this.incrementProperty('page');
@@ -121,6 +123,10 @@ export default Component.extend({
       }
     },
 
+    /**
+     *
+     * @param column
+     */
     onColumnClick(column) {
       if (column.sorted) {
         this.set(
@@ -128,6 +134,16 @@ export default Component.extend({
           (column.ascending ? '' : '-') + column.get('valuePath')
         );
         this.resetTable();
+      }
+    },
+
+    /**
+     *
+     * @param matches
+     */
+    onAfterResponsiveChange(matches) {
+      if (matches.indexOf('jumbo') > -1) {
+        this.get('table.expandedRows').setEach('expanded', false);
       }
     }
   }
