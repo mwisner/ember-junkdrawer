@@ -138,6 +138,25 @@ of components to create groups.
   {{/bs/list-group}}
 ```
 
+### Confirm Button
+A little more delicious syntax sugar :honey_pot: for when you want to have a button with
+modal confirmation.
+
+```hbs
+{{#confirm-button
+  type="danger"
+  buttonText="Dangerous Action"
+  modalTitle="Trigger Missile Alert?"
+  onSubmit=(action "realMissileAlert")
+  onCancel=(action "fakeMissileAlert")
+}}
+  This is the text that goes into the body of the modal.
+
+{{/confirm-button}}
+```
+
+
+
 # Tree Shaking
 Use either blacklist or whitelist, not both.
 In your ember-cli-build.js:
@@ -205,4 +224,18 @@ generator to extend the provided service `ember generate current-user <your serv
 didSetupUser(user) {},
 didSetupOrganization(organization) {},
 didUserLoadError(){}
+```
+
+## Default Ember Data Time Stamped Model
+Tired of using the same stupid model every time?
+
+The time stamped model comes pre-loaded with: `created`, `modified`, `metadata` properties
+predefined.
+
+```js
+  // myapp/app/models/mymodel.js
+  import TimeStampModel from 'ember-junkdrawer/models/time-stamped-model';
+  export default TimeStampModel.extend({
+    custom: DS.attr('string')
+  })
 ```

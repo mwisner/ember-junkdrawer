@@ -1,0 +1,21 @@
+{{buttonText}}
+
+{{#bs-modal-simple
+  open=modalIsOpen
+  title=modalTitle
+  closeTitle=closeButton
+  submitTitle=submitButton
+  size=modalSize
+  fade=fade
+  closeButton=closeButton
+  backdrop=backdrop
+  backdropClose=backdropClose
+  onSubmit=(action "submit")
+  onHidden=(action "cancel")
+  renderInPlace=renderInPlace}}
+  {{#if hasBlock}}
+    {{yield}}
+  {{else}}
+    {{defaultModalText}}
+  {{/if}}
+{{/bs-modal-simple}}

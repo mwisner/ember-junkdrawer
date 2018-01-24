@@ -15,7 +15,7 @@
       </div>
       <div class="col-md-9">
         <div>
-          <h1 id="list-groups">List Groups</h1>
+          <h2 id="list-groups">List Groups</h2>
           {{#bs/list-group as |g|}}
             {{g.item text="inline text"}}
             {{#g.item tagName="div" active=isActive disabled=isDisabled type="danger"}}
@@ -25,6 +25,18 @@
               Clickable as a button
             {{/g.action}}
           {{/bs/list-group}}
+        </div>
+        <div>
+          <h2 id="Confim Button">Confirm Button</h2>
+          {{#confirm-button
+            modalTitle="Titular Modal"
+            buttonText="Click Me"
+            onSubmit=(action "logStuff")
+            onCancel=(action "alertStuff")
+          }}
+            This is the text that goes into the modal.
+
+          {{/confirm-button}}
         </div>
       </div>
     </div>
