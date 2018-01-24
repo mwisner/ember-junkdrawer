@@ -15,7 +15,7 @@ export default Component.extend({
   src: false,
   alt: false,
   init() {
-    this._super(..arguments);
+    this._super(...arguments);
     assert('You musn\'t modify `tagName` to be anything other than `img`',
             get(this, 'tagName') === 'img');
     assert('You must provide a `src` attribute', get(this, 'src'));
