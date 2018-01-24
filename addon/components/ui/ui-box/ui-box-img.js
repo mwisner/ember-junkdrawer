@@ -11,7 +11,7 @@ export default Component.extend({
   position: 'top',
   _position: computed('position', function() {
     return `card-img-${get(this, 'position')}`;
-  })
+  }),
   src: false,
   alt: false,
   init() {
