@@ -1,6 +1,8 @@
-{{yield (hash header=(component 'ui/ui-box/ui-box-header'))}}
-{{yield (hash image=(component 'ui/ui-box/ui-box-image'))}}
-{{yield (hash body=(component 'ui/ui-box/ui-box-body'))}}
-{{yield (hash footer=(component 'ui/ui-box/ui-box-footer'))}}
-{{yield (hash list=(component 'ui/ui-box/ui-box-list'))}}
-
+{{yield (hash
+          body=(component 'ui/ui-box/ui-box-body')
+          footer=(component 'ui/ui-box/ui-box-footer')
+          header=(component 'ui/ui-box/ui-box-header')
+          icon=(component 'ui/ui-box/ui-box-icon' direction=direction)
+          image=(component 'ui/ui-box/ui-box-image')
+          img=(component 'ui/ui-box/ui-box-img')
+          list=(component 'ui/ui-box/ui-box-list'))}}

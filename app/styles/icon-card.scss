@@ -1,0 +1,28 @@
+
+.icon-box-row {
+  flex-direction: row !important;
+}
+
+.icon-box-row-reverse {
+  flex-direction: row-reverse !important;
+}
+
+.icon-box__row-border {
+   @include border-left-radius($card-inner-border-radius);
+}
+
+.icon-box__row-reverse-border {
+   @include border-right-radius($card-inner-border-radius);
+}
+
+.icon-box__column-border {
+   @include border-top-radius($card-inner-border-radius);
+}
+
+$columns: 12 !default;
+
+@for $i from 1 through $columns {
+  .icon-box__width-#{$i} {
+    @include make-col($i, $columns);
+  }
+}
