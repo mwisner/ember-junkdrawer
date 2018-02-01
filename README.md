@@ -135,6 +135,7 @@ of components to create groups.
     {{#g.action onClick=(action "myAction")}}
       Clickable as a button
     {{/g.action}}
+    {{#g.link "route.detail" "id"}}Just like a regular link{{/g.link}}
   {{/bs/list-group}}
 ```
 
