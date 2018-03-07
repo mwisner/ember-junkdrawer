@@ -12,7 +12,7 @@ import layout from '../../templates/table/model-table';
 export default Component.extend({
   layout,
   store: service(),
-  page: 0,
+  page: 1,
   page_size: 30,
   sort: 'name',
   recordType: null,
@@ -84,6 +84,7 @@ export default Component.extend({
   fetchRecords: task(function*() {
     let query = this.getProperties(['page', 'page_size', 'sort']);
     query = assign(query, this.get('recordQuery'));
+
     let records = yield this.get('store')
       .query(this.get('recordType'), query)
       .catch(() => {
@@ -92,10 +93,30 @@ export default Component.extend({
 
     if (records.get('length')) {
       this.get('model').pushObjects(records.toArray());
-      this.set('canLoadMore', true);
-    } else {
-      this.set('canLoadMore', false);
     }
+
+    //
+    // JSON API format
+    if (records.get("meta.pagination.page")) {
+      if (records.get("meta.pagination.page") < records.get("meta.pagination.pages")) {
+        this.set('canLoadMore', true);
+        this.set('page', records.get("meta.pagination.page") + 1);
+      } else {
+        this.set('canLoadMore', false);
+      }
+
+    //
+    // Fall back to shoddy non-json api strategy, here we wait until our first 404 and then stop.
+    } else {
+      if (records.get('length')) {
+        this.set('canLoadMore', true);
+        this.incrementProperty('page')
+      }
+      else {
+        this.set('canLoadMore', false);
+      }
+    }
+
 
   }).restartable(),
 
@@ -118,7 +139,7 @@ export default Component.extend({
      */
     onScrolledToBottom() {
       if (this.get('canLoadMore')) {
-        this.incrementProperty('page');
+        //this.incrementProperty('page');
         this.get('fetchRecords').perform();
       }
     },
