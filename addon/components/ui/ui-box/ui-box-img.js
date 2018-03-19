@@ -2,9 +2,7 @@ import Component from '@ember/component';
 import {assert, warn} from '@ember/debug';
 import {computed, get} from '@ember/object';
 
-
 export default Component.extend({
-  layout,
   classNameBindings: ['_position'],
   attributeBindings: ['src', 'alt'],
   tagName: 'img',
