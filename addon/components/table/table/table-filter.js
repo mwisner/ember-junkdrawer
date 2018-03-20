@@ -7,17 +7,14 @@ export default Component.extend({
   defaultRecordFilter: null, // Ohh yeah, this isn't confusing at all.
   preFilterAlter: null,
   hasFiltered: false,
+  defaultRecordQuery: null,
+  recordQuery: null,
 
   /**
    *
    */
   init() {
     this._super(...arguments);
-    this.setProperties({
-      defaultRecordQuery: {},
-      recordQuery: {},
-    });
-
     this.setDefaultFilters();
   },
 

@@ -22,6 +22,10 @@ export default Component.extend({
   model: A([]),
   meta: null,
   table: null,
+  recordQuery: null,
+  defaultRecordQuery: null,
+  columns: null,
+  tableOptions: null,
   internalTableOptions: computed('tableOptions', function() {
 
     let defaults = {
@@ -45,12 +49,7 @@ export default Component.extend({
       table: null,
       model: A([]),
       canLoadMore: true,
-      columns: [],
-      recordQuery: {},
-      defaultRecordQuery: {},
-      tableOptions: {},
     });
-
   },
 
   /**
