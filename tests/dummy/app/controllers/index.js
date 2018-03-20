@@ -5,7 +5,7 @@ export default Controller.extend({
     myAction() {
     },
     logStuff() {
-      console.log('Im like "Hey, whats up? Hello"');
+      alert('Im like "Hey, whats up? Hello"');
     },
     alertStuff() {
       alert('You wanted an alert? You get an alert')
