@@ -7,6 +7,14 @@ const Router = EmberRouter.extend({
 });
 
 Router.map(function() {
+  this.route('docs', function() {
+    this.route('api', function() {
+      this.route('item', { path: '/test' });
+    });
+  });
+
+  this.route('not-found', { path: '/404' });
+
 });
 
 export default Router;
