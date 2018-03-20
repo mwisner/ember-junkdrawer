@@ -16,16 +16,12 @@ export default Component.extend({
   page_size: 30,
   sort: 'name',
   recordType: null,
-  recordQuery: {},
-  defaultRecordQuery: {},
   isLoading: oneWay('fetchRecords.isRunning'),
   canLoadMore: true,
   enableSync: true,
   model: A([]),
   meta: null,
-  columns: [],
   table: null,
-  tableOptions: {},
   internalTableOptions: computed('tableOptions', function() {
 
     let defaults = {
@@ -49,6 +45,10 @@ export default Component.extend({
       table: null,
       model: A([]),
       canLoadMore: true,
+      columns: [],
+      recordQuery: {},
+      defaultRecordQuery: {},
+      tableOptions: {},
     });
 
   },
