@@ -15,6 +15,7 @@ Template driven tables with support for filtering.
   dir=dir
   sort=sort
   columns=columns
+  recordQuery=myQueryFilterOptions
   recordType=recordType as |t| }}
 
   {{#t.filter
