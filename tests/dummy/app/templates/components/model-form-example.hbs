@@ -1,0 +1,11 @@
+{{#docs-snippet name="model-form-example.hbs" title="model-form-example.hbs"}}
+  {{#bs-form model=changeset onSubmit=(action "submit") as |form|}}
+    {{#ui/ui-box as |b|}}
+      {{#b.body}}
+        {{form.element controlType="avatar" property="logoPropertyName"}}
+        {{form.element controlType="baremetrics" property="dateRange" options=(hash presets=presets)}}
+        {{form.element controlType="x-toggle" property="active" options=(hash theme="light")}}
+      {{/b.body}}
+    {{/ui/ui-box}}
+  {{/bs-form}}
+{{/docs-snippet}}
