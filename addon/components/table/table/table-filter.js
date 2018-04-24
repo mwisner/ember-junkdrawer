@@ -1,16 +1,14 @@
 import Component from '@ember/component';
-
 import layout from '../../../templates/table/table/table-filter';
 
 export default Component.extend({
   layout,
   parentComponent: null,
-  defaultRecordQuery: {},
   defaultRecordFilter: null, // Ohh yeah, this isn't confusing at all.
-  recordQuery: {},
   preFilterAlter: null,
-
   hasFiltered: false,
+  defaultRecordQuery: null,
+  recordQuery: null,
 
   /**
    *

@@ -1,6 +1,6 @@
 {
   "name": "ember-junkdrawer",
-  "version": "0.6.3",
+  "version": "0.6.5",
   "description": "The default blueprint for ember-cli addons.",
   "keywords": [
     "ember-addon"
@@ -11,12 +11,12 @@
     "doc": "doc",
     "test": "tests"
   },
-  "repository": "",
+  "repository": "mwisner/ember-junkdrawer",
   "scripts": {
     "build": "ember build",
     "lint:js": "eslint ./*.js addon addon-test-support app config lib server test-support tests",
     "start": "ember serve",
-    "test": "ember test",
+    "test": "ember try:each",
     "test:all": "ember try:each"
   },
   "dependencies": {
@@ -55,6 +55,7 @@
     "ember-file-upload": "^2.2.4",
     "ember-load-initializers": "^1.0.0",
     "ember-maybe-import-regenerator": "^0.1.6",
+    "ember-native-dom-helpers": "^0.6.2",
     "ember-resolver": "^4.0.0",
     "ember-source": "~3.1.0",
     "ember-source-channel-url": "^1.0.1",
