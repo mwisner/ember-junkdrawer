@@ -87,7 +87,7 @@ module.exports = {
 
     this.app = app;
 
-    this.junkdrawerOptions = extend(extend({}, defaultOptions), app.options['ember-junkdrawer']);
+    this.junkdrawerOptions = Object.assign({}, defaultOptions, app.options['ember-junkdrawer']);
   },
 
   treeForAddon(tree) {
@@ -102,10 +102,6 @@ module.exports = {
     tree = this.debugTree(tree, 'addon-templates-tree:tree-shaken');
 
     return this._super.treeForAddonTemplates.call(this, tree);
-  },
-
-  warn(message) {
-    this.ui.writeLine(chalk.yellow(message));
   },
 
   filterComponents(tree) {
