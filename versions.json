@@ -4,5 +4,11 @@
     "tag": null,
     "path": "feat/addon-docs",
     "name": "feat/addon-docs"
+  },
+  "master": {
+    "sha": "2263815a173fecc88d7d8a6c4fb4a2cad00799ed",
+    "tag": null,
+    "path": "master",
+    "name": "master"
   }
 }

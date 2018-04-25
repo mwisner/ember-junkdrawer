@@ -1,0 +1,1 @@
+{"jsonapi":{"version":"1.0"},"data":{"type":"project","id":"ember-junkdrawer","attributes":{"name":"ember-junkdrawer","version":"0.6.5","navigationIndex":{}},"relationships":{"modules":{"data":[]}}}}
