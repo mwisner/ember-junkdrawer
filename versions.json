@@ -18,9 +18,15 @@
     "name": "v0.7.0"
   },
   "latest": {
-    "sha": "6be645ca74569ba742fb803b3fadd2d2b23379f2",
-    "tag": "v0.7.0",
+    "sha": "f8d2054dd8c45ea05d3d7bf7e6a61046559cf517",
+    "tag": "v0.7.1",
     "path": "latest",
     "name": "latest"
+  },
+  "v0.7.1": {
+    "sha": "f8d2054dd8c45ea05d3d7bf7e6a61046559cf517",
+    "tag": "v0.7.1",
+    "path": "v0.7.1",
+    "name": "v0.7.1"
   }
 }
