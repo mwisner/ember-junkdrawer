@@ -1,0 +1,6 @@
+{{#docs-snippet name="model-form-example.hbs" title="model-form-example.hbs"}}
+  {{#bs-form model=changeset onSubmit=(action "submit") as |form|}}
+    {{form.element controlType="text" property="name"}}
+    {{bs-button defaultText="Submit" type="primary" buttonType="submit"}}
+  {{/bs-form}}
+{{/docs-snippet}}

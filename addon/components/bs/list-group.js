@@ -4,21 +4,9 @@ import layout from '../../templates/components/bs/list-group';
 export default Component.extend({
   layout,
 
-  /**
-   * @public
-   * @property
-   * Control tag type, defaults as ul, 
-   * available types are `div`, `ul`
-   */
+  classNames: ['list-group'],
+  classNameBindings: ['flush:list-group-flush'],
+
   type: 'ul',
-  
-  /**
-   * @public
-   * @property
-   * control flush property
-   */
   flush: false,
-  tagNameBinding: ['type'],
-  classNamaes: ['list-group'],
-  classNameBindings: ['flush:list-group-flush']
 });
