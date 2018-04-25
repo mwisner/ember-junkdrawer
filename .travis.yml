@@ -12,8 +12,9 @@ addons:
   chrome: stable
 
 cache:
+  yarn: true
   directories:
-    - $HOME/.npm
+    - node_modules
 
 env:
   global:
@@ -39,6 +40,10 @@ before_install:
   - npm config set spin false
   - npm install -g npm@4
   - npm --version
+  - yarn --version
+
+install:
+  - yarn install
 
 script:
   - npm run lint:js
