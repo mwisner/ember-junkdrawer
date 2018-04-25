@@ -1,4 +1,7 @@
 module.exports = {
+  globals: {
+    server: true,
+  },
   root: true,
   parserOptions: {
     ecmaVersion: 2017,
@@ -15,21 +18,27 @@ module.exports = {
     browser: true
   },
   rules: {
+    'no-unused-vars': ["error", { "args": "none" }],
+    'no-console': ["error", { allow: ["warn", "error"] }],
+
+    // ember-keyboard uses events
+    'ember/no-on-calls-in-components': 'off',
   },
   overrides: [
     // node files
     {
       files: [
-        'ember-cli-build.js',
         'index.js',
         'testem.js',
+        'ember-cli-build.js',
         'config/**/*.js',
-        'tests/dummy/config/**/*.js'
+        'lib/**/*.js',
+        'tests/dummy/config/**/*.js',
+        'tests-node/**/*.js'
       ],
       excludedFiles: [
-        'addon/**',
-        'addon-test-support/**',
         'app/**',
+        'addon/**',
         'tests/dummy/app/**'
       ],
       parserOptions: {
@@ -44,6 +53,23 @@ module.exports = {
       rules: Object.assign({}, require('eslint-plugin-node').configs.recommended.rules, {
         // add your custom rules and overrides for node files here
       })
+    },
+
+    // test files
+    {
+      files: ['tests/**/*.js'],
+      excludedFiles: ['tests/dummy/**/*.js'],
+      env: {
+        embertest: true
+      }
+    },
+
+    // node test files
+    {
+      files: ['tests-node/**/*.js'],
+      rules: {
+        'node/no-unpublished-require': 'off'
+      }
     }
   ]
 };

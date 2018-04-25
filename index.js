@@ -2,13 +2,8 @@
 /* eslint-disable ember-suave/prefer-destructuring */
 'use strict';
 
-const path = require('path');
-const util = require('util');
-const extend = util._extend;
-const mergeTrees = require('broccoli-merge-trees');
 const Funnel = require('broccoli-funnel');
 const BroccoliDebug = require('broccoli-debug');
-const chalk = require('chalk');
 
 const defaultOptions = {};
 
