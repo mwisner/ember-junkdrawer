@@ -1,59 +1,15 @@
-{{#bs-navbar as |navbar|}}
-  <div class="navbar-header">
-    <a class="navbar-brand" href="#">Ember Junk-Drawer</a>
-  </div>
-{{/bs-navbar}}
-<div class="row content">
-  <div class="offset-md-2 col-md-8">
-    <div class="row">
-      <div class="col-md-3">
-        <ul class="nav flex-column">
-          <li class="nav-item">
-            <a class="nav-link" href="#list-groups">List Groups</a>
-          </li>
-        </ul>
-      </div>
-      <div class="col-md-9">
-        <div class="mb-3">
-          <h2 id="ui-box">UI Box</h2>
-          {{#ui/ui-box as |b|}}
-            {{#b.header}} Card Header {{/b.header}}
-            {{#b.body}} Card text in the body {{/b.body}}
-          {{/ui/ui-box}}
-        </div>
+{{docs-hero
+  logo='ember'
+  slimHeading='Ember'
+  strongHeading='Junkdrawer'
+  byline='For All The Things'}}
 
-        <div class="mb-3">
-          {{#ui/ui-box direction="row" as |b|}}
-            {{#b.icon colSize=11}} icon {{/b.icon}}
-            {{#b.body}} I'm next to an icon! {{/b.body}}
-          {{/ui/ui-box}}
-        </div>
-
-        <div class="mb-3">
-          <h2 id="list-groups">List Groups</h2>
-          {{#bs/list-group as |g|}}
-            {{g.item text="inline text"}}
-            {{#g.item tagName="div" active=isActive disabled=isDisabled type="danger"}}
-              Blocks work too, with custom properties!
-            {{/g.item}}
-            {{#g.action onClick=(action "myAction")}}
-              Clickable as a button
-            {{/g.action}}
-          {{/bs/list-group}}
-        </div>
-        <div class="mb-3">
-          <h2 id="Confim Button">Confirm Button</h2>
-          {{#confirm-button
-            modalTitle="Titular Modal"
-            buttonText="Click Me"
-            onSubmit=(action "logStuff")
-            onCancel=(action "alertStuff")
-          }}
-            This is the text that goes into the modal.
-
-          {{/confirm-button}}
-        </div>
-      </div>
+<div class='docs-container docs-md'>
+  <section class='max-w-md mx-auto pb-8'>
+    <div class="my-16 text-right">
+      {{#link-to 'docs' class='bg-grey-darkest hover:bg-black text-white py-2 px-4 no-underline rounded'}}
+        Read the docs →
+      {{/link-to}}
     </div>
-  </div>
+  </section>
 </div>
