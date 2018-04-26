@@ -81,13 +81,17 @@ export default Component.extend({
     }
   },
 
+
+
+  disableSubmit: alias('submit.isRunning'),
+
   /**
    * Deprecated. use the derived submit task state.
    */
   formState: 'default',
   buttonState: alias('formState'),
   formSubmitButtonDisabled: equal('formState', 'pending'),
-  disableSubmit: alias('formSubmitButtonDisabled'),
+
   setFormState(state) {
     this.set('formState', state);
   },
@@ -143,6 +147,16 @@ export default Component.extend({
     if (get(this, 'model.isNew')) {
       this.get('model').deleteRecord();
     }
+  },
+
+  /**
+   * Reset the form with a fresh model data.
+   * @public
+   * @param {Object} freshModel A new object to re-initialize the form
+   */
+  resetFormData(freshModel) {
+    this.set('model', freshModel);
+    this.initFormData();
   },
 
   actions: {
