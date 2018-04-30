@@ -35,6 +35,11 @@
                 {{/body.loader}}
               {{/if}}
 
+
+              {{#if table.isEmpty}}
+                {{yield (hash noResults=body.no-data)}}
+              {{/if}}
+
             {{/t.body}}
           {{/light-table}}
         {{/if}}
