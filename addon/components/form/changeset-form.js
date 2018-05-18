@@ -165,10 +165,6 @@ export default Component.extend({
      * @param changeset
      */
     submit(changeset) {
-      // Only submit if something has actually changed.
-      if (!changeset.get('isDirty')) {
-        return false;
-      }
       // Deprecated.
       this.setFormState('pending');
       return this.get('submit').perform(changeset);
