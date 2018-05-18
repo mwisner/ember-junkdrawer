@@ -6,10 +6,10 @@
     "name": "feat/addon-docs"
   },
   "master": {
-    "sha": "4e1ac9c683485a7527ebb37052c00fc5cde40f4b",
-    "tag": null,
     "path": "master",
-    "name": "master"
+    "name": "master",
+    "sha": "3ee33068fb89393cb9e86bfdd193eb5ff74a1052",
+    "tag": null
   },
   "v0.7.0": {
     "sha": "6be645ca74569ba742fb803b3fadd2d2b23379f2",
