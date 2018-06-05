@@ -1,7 +1,7 @@
 {
   "name": "ember-junkdrawer",
   "version": "0.7.2",
-  "description": "The default blueprint for ember-cli addons.",
+  "description": "Utility belt of bootstrap extras.",
   "keywords": [
     "ember-addon"
   ],
