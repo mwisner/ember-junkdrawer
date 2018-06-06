@@ -1,4 +1,3 @@
-import { inject as service } from '@ember/service';
 import FormComponent from 'ember-junkdrawer/components/form/changeset-form';
 
 
