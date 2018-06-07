@@ -20,8 +20,8 @@
   "latest": {
     "path": "latest",
     "name": "latest",
-    "sha": "204631037e65deb5e83a785679abca77f9110136",
-    "tag": "v0.7.2"
+    "sha": "5bff9f9fbddb368b200defa513a16d0509a57061",
+    "tag": "v0.7.3"
   },
   "v0.7.1": {
     "sha": "f8d2054dd8c45ea05d3d7bf7e6a61046559cf517",
@@ -34,5 +34,11 @@
     "name": "v0.7.2",
     "sha": "204631037e65deb5e83a785679abca77f9110136",
     "tag": "v0.7.2"
+  },
+  "v0.7.3": {
+    "path": "v0.7.3",
+    "name": "v0.7.3",
+    "sha": "5bff9f9fbddb368b200defa513a16d0509a57061",
+    "tag": "v0.7.3"
   }
 }
