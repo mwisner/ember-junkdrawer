@@ -18,15 +18,21 @@
     "name": "v0.7.0"
   },
   "latest": {
-    "sha": "f8d2054dd8c45ea05d3d7bf7e6a61046559cf517",
-    "tag": "v0.7.1",
     "path": "latest",
-    "name": "latest"
+    "name": "latest",
+    "sha": "204631037e65deb5e83a785679abca77f9110136",
+    "tag": "v0.7.2"
   },
   "v0.7.1": {
     "sha": "f8d2054dd8c45ea05d3d7bf7e6a61046559cf517",
     "tag": "v0.7.1",
     "path": "v0.7.1",
     "name": "v0.7.1"
+  },
+  "v0.7.2": {
+    "path": "v0.7.2",
+    "name": "v0.7.2",
+    "sha": "204631037e65deb5e83a785679abca77f9110136",
+    "tag": "v0.7.2"
   }
 }
