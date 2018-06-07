@@ -5,7 +5,9 @@
 const Funnel = require('broccoli-funnel');
 const BroccoliDebug = require('broccoli-debug');
 
-const defaultOptions = {};
+const defaultOptions = {
+  isDevelopingAddon: false
+};
 
 const componentDependencies = {};
 
@@ -70,13 +72,18 @@ function findHostShim() {
 module.exports = {
   name: 'ember-junkdrawer',
 
-  isDevelopingAddon: function () {
-    return true;
+  isDevelopingAddon() {
+    let findHost = this._findHost || findHostShim;
+    let app = findHost.call(this);
+
+    let {isDevelopingAddon} = Object.assign({}, defaultOptions, app.options['ember-junkdrawer']);
+
+    return isDevelopingAddon;
   },
 
   init() {
     this._super.init.apply(this, arguments);
-    this.debugTree = BroccoliDebug.buildDebugCallback(`ember-bootstrap:${this.name}`);
+    this.debugTree = BroccoliDebug.buildDebugCallback(`ember-junkdrawer:${this.name}`);
   },
 
   included() {
