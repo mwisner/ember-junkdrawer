@@ -90,18 +90,18 @@ component.hbs:
     Create New Organization
   {{/b.header}}
 
-  {{#b.body classNames="no-padding"}}
+  {{#b.body paddingSize='0'}}
     {{form.element label="Organization Name" controlType="text" property="name"}}
   {{/b.body}}
 
-  {{#b.footer}}
+  {{#b.footer contentAlign='center'}}
     {{bs-button defaultText="Create Organization" pendingText="Saving..." buttonType="submit"}}
   {{/b.footer}}
 
 {{/ui/ui-box}}
 ```
-Set `classNames` to pass modifier classes to the component.
-Set `tagName` to override the component's default element.
+
+
 
 ## Bootstrap Extras
 The great [Ember Bootstrap](http://www.ember-bootstrap.com/) addon provides a lot of great functionality.
@@ -179,7 +179,6 @@ In your ember-cli-build.js:
 | Component  | component:simple-form-group  |
 | Component  | component:table-loader  |
 | Component  | component:thing-list-item  |
-| Component  | component:thing-list  |
 | Component  | component:thing-list  |
 | Component  | component:ui-box  |
 | Component  | compoennt:close-button |
