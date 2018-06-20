@@ -3,7 +3,7 @@
   <div class="col-md-12">
     {{#ui/ui-box as |b|}}
       {{yield (hash boxHeader=b.header)}}
-      {{#b.body classNames="no-padding"}}
+      {{#b.body paddingSize='0'}}
         {{#if table }}
           {{#light-table
             table
