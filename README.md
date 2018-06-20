@@ -101,6 +101,11 @@ component.hbs:
 {{/ui/ui-box}}
 ```
 
+`paddingSize` is configurable for all box components
+`contentAlign` is configurable for header and footer components
+  - accepts `left`, `right`, `center`, and `between`
+  - header has default of left alignment
+  - footer has default of right alignment
 
 
 ## Bootstrap Extras
