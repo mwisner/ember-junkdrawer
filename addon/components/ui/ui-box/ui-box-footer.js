@@ -3,10 +3,10 @@ import { computed } from '@ember/object';
 
 export default Component.extend({
   classNames: ['card-footer', 'd-flex', 'align-items-center'],
-  classNameBindings: ['alignClass'],
+  classNameBindings: ['justifyContent'],
   contentAlign: 'right',
 
-  alignClass: computed('contentAlign', function() {
+  justifyContent: computed('contentAlign', function() {
     switch(this.get('contentAlign')) {
       case 'right':
         return 'justify-content-end';

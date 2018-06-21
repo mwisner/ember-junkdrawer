@@ -4,11 +4,11 @@ import { computed } from '@ember/object';
 export default Component.extend({
   tagName: 'h5',
   classNames: ['card-header', 'd-flex', 'align-items-center', 'px-3'],
-  classNameBindings: ['alignClass', 'paddingClass'],
+  classNameBindings: ['justifyContent', 'paddingClass'],
   contentAlign: 'left',
   paddingSize: 3,
 
-  alignClass: computed('contentAlign', function() {
+  justifyContent: computed('contentAlign', function() {
     switch(this.get('contentAlign')) {
       case 'left':
         return 'justify-content-start';
