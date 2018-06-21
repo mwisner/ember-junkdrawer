@@ -94,7 +94,7 @@ component.hbs:
     {{form.element label="Organization Name" controlType="text" property="name"}}
   {{/b.body}}
 
-  {{#b.footer contentAlign='center'}}
+  {{#b.footer justifyContent='center'}}
     {{bs-button defaultText="Create Organization" pendingText="Saving..." buttonType="submit"}}
   {{/b.footer}}
 
@@ -102,10 +102,10 @@ component.hbs:
 ```
 
 `paddingSize` accepts integers `[0 - 5]`  
-`contentAlign` is configurable for header and footer components
- - accepts `left`, `right`, `center`, and `between`
-   - header defaults to left
-   - footer defaults to right
+`justifyContent` is configurable for header and footer components
+ - accepts `start`, `center`, `end`, `between`, and `around`
+   - header defaults to start
+   - footer defaults to end
 
 
 ## Bootstrap Extras
