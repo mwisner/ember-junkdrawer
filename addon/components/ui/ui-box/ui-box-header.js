@@ -6,7 +6,7 @@ export default Component.extend({
   classNames: ['card-header', 'd-flex', 'align-items-center', 'px-3'],
   classNameBindings: ['alignClass', 'paddingClass'],
   contentAlign: 'left',
-  paddingSize: '3',
+  paddingSize: 3,
 
   alignClass: computed('contentAlign', function() {
     switch(this.get('contentAlign')) {

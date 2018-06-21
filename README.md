@@ -90,7 +90,7 @@ component.hbs:
     Create New Organization
   {{/b.header}}
 
-  {{#b.body paddingSize='0'}}
+  {{#b.body paddingSize=0}}
     {{form.element label="Organization Name" controlType="text" property="name"}}
   {{/b.body}}
 
@@ -101,11 +101,11 @@ component.hbs:
 {{/ui/ui-box}}
 ```
 
-`paddingSize` is configurable for all box components
+`paddingSize` accepts integers `[0 - 5]`  
 `contentAlign` is configurable for header and footer components
-  - accepts `left`, `right`, `center`, and `between`
-  - header has default of left alignment
-  - footer has default of right alignment
+ - accepts `left`, `right`, `center`, and `between`
+   - header defaults to left
+   - footer defaults to right
 
 
 ## Bootstrap Extras
