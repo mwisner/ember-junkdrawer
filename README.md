@@ -16,7 +16,7 @@ Template driven tables with support for filtering.
   sort=sort
   columns=columns
   recordQuery=myQueryFilterOptions
-  recordType=recordType as |t| }}
+  recordType=recordType as |t|}}
 
   {{#t.filter
     defaultRecordQuery=defaultRecordQuery
@@ -25,6 +25,14 @@ Template driven tables with support for filtering.
     {{filter.element label="Name" controlType="text" property="name__icontains"}}
     {{filter.element label="Date Range" controlType="baremetrics" presets=dateFilterPresets property="daterange"}}
   {{/t.filter}}
+  
+  {{#t.loader}}
+    Loading...
+  {{/t.loader}}
+  
+  {{#t.noResults}}
+    No Results Found
+  {{/t.noResults}}
 
 {{/table/model-table}}
 ```
