@@ -11,35 +11,30 @@
             responsive=internalTableOptions.responsive
             onAfterResponsiveChange=(action 'onAfterResponsiveChange')
             height=internalTableOptions.height as |t|}}
+
             {{t.head
               onColumnClick=(action 'onColumnClick')
               iconAscending='fa fa-sort-asc'
               iconDescending='fa fa-sort-desc'
-
-              fixed=true
-            }}
+              fixed=true}}
 
             {{#t.body
               canSelect=internalTableOptions.canSelect
               expandOnClick=internalTableOptions.expandOnClick
               onScrolledToBottom=(action 'onScrolledToBottom')
-            as |body| }}
+              as |body|}}
 
               {{#if internalTableOptions.responsive }}
                 {{yield (hash expandedRow=body.expanded-row)}}
               {{/if}}
 
               {{#if isLoading}}
-                {{#body.loader}}
-                  {{table/table-loader}}
-                {{/body.loader}}
+                {{yield (hash loader=body.loader)}}
+              {{else}}
+                {{#if table.isEmpty}}
+                  {{yield (hash noResults=body.no-data)}}
+                {{/if}}
               {{/if}}
-
-
-              {{#if table.isEmpty}}
-                {{yield (hash noResults=body.no-data)}}
-              {{/if}}
-
             {{/t.body}}
           {{/light-table}}
         {{/if}}

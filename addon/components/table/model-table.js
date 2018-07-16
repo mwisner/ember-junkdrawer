@@ -43,20 +43,13 @@ export default Component.extend({
   /**
    *
    */
-  init() {
+  didReceiveAttrs() {
     this._super(...arguments);
     this.setProperties({
       table: null,
       model: A([]),
       canLoadMore: true,
     });
-  },
-
-  /**
-   *
-   */
-  didReceiveAttrs() {
-    this._super(...arguments);
 
     let table = new Table(this.get('columns'), this.get('model'), {
       enableSync: this.get('enableSync')
@@ -115,8 +108,6 @@ export default Component.extend({
         this.set('canLoadMore', false);
       }
     }
-
-
   }).restartable(),
 
   /**
