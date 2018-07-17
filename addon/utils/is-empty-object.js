@@ -1,4 +1,3 @@
-import {assert} from '@ember/debug';
 import {typeOf} from '@ember/utils';
 
 export default function isEmptyObject(testObject) {
