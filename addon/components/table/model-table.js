@@ -33,7 +33,7 @@ export default Component.extend({
       canSelect: false,
       expandOnClick: false,
       responsive: false,
-      mulitSelect: false
+      multiSelect: false
     };
 
     return Object.assign(defaults, this.get('tableOptions'));
