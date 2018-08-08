@@ -154,8 +154,8 @@ export default Component.extend({
         this.resetTable();
       }
     },
-    onRowClick(...arguments) {
-      this.didClickRow(arguments);
+    onRowClick(...args) {
+      this.didClickRow(args);
     },
     /**
      *
