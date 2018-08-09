@@ -20,8 +20,10 @@
 
             {{#t.body
               canSelect=internalTableOptions.canSelect
+              mulitSelect=internalTableOptions.multiSelect
               expandOnClick=internalTableOptions.expandOnClick
               onScrolledToBottom=(action 'onScrolledToBottom')
+              onRowClick=(action "onRowClick")
               as |body|}}
 
               {{#if internalTableOptions.responsive }}

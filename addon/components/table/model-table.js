@@ -33,6 +33,7 @@ export default Component.extend({
       canSelect: false,
       expandOnClick: false,
       responsive: false,
+      multiSelect: false
     };
 
     return Object.assign(defaults, this.get('tableOptions'));
@@ -122,6 +123,12 @@ export default Component.extend({
     this.get('fetchRecords').perform();
   },
 
+  /**
+   * Noops
+   * Hanlder for ELT's did click row
+   */
+  didClickRow() {},
+
   actions: {
 
     /**
@@ -147,7 +154,9 @@ export default Component.extend({
         this.resetTable();
       }
     },
-
+    onRowClick(...args) {
+      this.didClickRow(args);
+    },
     /**
      *
      * @param matches
