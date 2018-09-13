@@ -1,0 +1,11 @@
+{{yield (hash
+  page=page
+  page_size=page_size
+  canLoadMore=canLoadMore
+  list=list
+  tasks=(hash loadList=loadList)
+  actions=(hash
+    update=(action "update")
+    resetTable=(action "resetTable")
+    )
+  )}}
