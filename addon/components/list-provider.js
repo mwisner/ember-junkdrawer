@@ -82,21 +82,23 @@ export default Component.extend({
     }
   }).restartable(),
 
-  resetTable() {
+  resetTable(loadList) {
     this.setProperties({
       canLoadMore: true,
       page: 1,
     });
     this.get('list').clear();
-    this.get('fetchRecords').perform();
+    if (loadList) {
+      this.get('loadList').perform();
+    }
   },
 
   actions: {
     update(query) {
       this.get('loadList').perform(query);
     },
-    resetTable() {
-      this.resetTable();
+    resetTable(loadList=true) {
+      this.resetTable(loadList);
     }
   }
 
