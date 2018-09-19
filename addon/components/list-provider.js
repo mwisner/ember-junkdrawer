@@ -18,7 +18,6 @@ export default Component.extend({
   sort: 'name',
   recordType: null,
   canLoadMore: true,
-  list: A([]),
   meta: null,
   defaultRecordQuery: null,
 
@@ -28,6 +27,7 @@ export default Component.extend({
     this.setProperties({
       table: null,
       model: A([]),
+      list: A([]),
       canLoadMore: true,
     });
     this.get('loadList').perform()
