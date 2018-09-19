@@ -1,8 +1,5 @@
 import Component from '@ember/component';
-import { computed } from '@ember/object';
-import { oneWay } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
-import Table from 'ember-light-table';
 import { task } from 'ember-concurrency';
 import { A } from "@ember/array";
 import { assert } from '@ember/debug';
@@ -18,7 +15,6 @@ export default Component.extend({
   sort: 'name',
   recordType: null,
   canLoadMore: true,
-  list: A([]),
   meta: null,
   defaultRecordQuery: null,
 
@@ -28,6 +24,7 @@ export default Component.extend({
     this.setProperties({
       table: null,
       model: A([]),
+      list: A([]),
       canLoadMore: true,
     });
     this.get('loadList').perform()
