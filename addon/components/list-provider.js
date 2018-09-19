@@ -1,8 +1,5 @@
 import Component from '@ember/component';
-import { computed } from '@ember/object';
-import { oneWay } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
-import Table from 'ember-light-table';
 import { task } from 'ember-concurrency';
 import { A } from "@ember/array";
 import { assert } from '@ember/debug';
