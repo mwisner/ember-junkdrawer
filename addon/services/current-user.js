@@ -137,20 +137,17 @@ export default Service.extend({
         .findRecord('organization', currentOrganizationId)
         .then(data => {
           set(this, 'currentOrganization', data);
-          this.didLoadOrganization(data);
           return data;
         })
         .catch(() => {
           // Load user's default organization.
           let organization = organizations.get('firstObject');
           set(this, 'currentOrganization', organization);
-          this.didLoadOrganization(organization);
           return organization;
         });
     }
 
   }).drop(),
-  didLoadOrganization(){},
   /**
    * Ran after user has logged in.
    */
