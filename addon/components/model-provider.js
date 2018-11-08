@@ -67,7 +67,17 @@ export default Component.extend({
     if ('errors' in data) {
       if (Array.isArray(data['errors'])) {
         data['errors'].forEach(item => {
-          this.get('serverErrors').addObject(item.detail)
+          
+
+          if (this.get('changeset')) {
+            let {source: {pointer}, title = '', detail = ''} = item;
+            let keys = pointer.split('/');
+            let key = (keys[1] === 'attributes') ? keys.splice(2) : keys.splice(1);
+            key = key.join('.');
+            this.get('changeset').pushErrors(key, title, detail);
+          } else {
+            this.get('serverErrors').addObject(item.detail);
+          }
         });
       }
 

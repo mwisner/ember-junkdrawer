@@ -98,17 +98,18 @@ export default Service.extend({
   /**
    * Set the initial active organization.
    */
-  setActiveOrganization: task(function* () {
+  setActiveOrganization: task(function* (currentOrganizationId = false) {
     let organizations = yield this.get('organizations');
     if (!organizations.length) {
       return null;
     }
 
-    //
-    // Find recommended organization id.
-    let currentOrganizationId = this.get('session').get(
-      'data.currentOrganizationId'
-    );
+    if (!currentOrganizationId) {
+      // Find recommended organization id from local storage.
+      currentOrganizationId = this.get('session').get(
+        'data.currentOrganizationId'
+      );
+    }
 
     //
     // If we don't have a stored id, load the first one.
@@ -201,7 +202,7 @@ export default Service.extend({
    * 4) Select Active Organization
    * 5) Set Organization Features
    */
-  setupEverything: task(function* () {
+  setupEverything: task(function* (orgId) {
     //
     // Load Current User
     const user = yield this.get('loadUser').perform();
@@ -216,7 +217,7 @@ export default Service.extend({
     // Load Organizations
     const organizations = yield this.get('loadOrganizations').perform();
     if (organizations) {
-      const organization = yield this.get('setActiveOrganization').perform();
+      const organization = yield this.get('setActiveOrganization').perform(orgId);
       if (organization) {
         this._set_organization_features();
         this.didSetupOrganization(organization);
@@ -232,12 +233,12 @@ export default Service.extend({
    * We wrap a normal method around the task so that nobody has to remember
    * to call perform().
    */
-  initApp() {
+  initApp(orgId = false) {
     let taskInstance = null;
     if (this.get('initAppTask') && this.get('initAppTask.isRunning')) {
       taskInstance = this.get('initAppTask');
     } else {
-      taskInstance = this.get('setupEverything').perform();
+      taskInstance = this.get('setupEverything').perform(orgId);
       this.set('initAppTask', taskInstance);
     }
 
