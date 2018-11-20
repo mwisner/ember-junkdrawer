@@ -9,7 +9,7 @@ const Close = Component.extend({
   'aria-label': 'Close',
   type: 'button',
   // Noop
-  onClose() {},
+  close() {},
   click() {
     this.close();
   }

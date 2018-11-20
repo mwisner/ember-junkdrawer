@@ -7,15 +7,13 @@ module('Integration | Component | close-button', function(hooks) {
   setupRenderingTest(hooks);
 
   test('close button renders and handles clicks', async function(assert) {
-    assert.expect(2);
+    assert.expect(4);
 
-    this.set('myAction', function(val) { assert.ok(true)});
-    await render(hbs`{{close-button onClose=(action myAction)}}`);
-    assert.equal(this.element.textContent.trim(), '×');
-
+    this.set('myAction', function() { assert.ok(true)});
+    await render(hbs`{{close-button (action myAction)}}`);
+    assert.dom().hasText('×');
     assert.dom('button').hasClass('close');
     assert.dom('button').hasAttribute('aria-label', 'Close');
-
     await click('.close');
   });
 });
