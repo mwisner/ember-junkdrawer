@@ -1,6 +1,5 @@
 import Component from '@ember/component';
 import layout from '../templates/components/close-button';
-import {get} from '@ember/object';
 
 const Close = Component.extend({
   layout,
@@ -10,9 +9,9 @@ const Close = Component.extend({
   'aria-label': 'Close',
   type: 'button',
   // Noop
-  close() {},
+  onClose() {},
   click() {
-    get(this, 'close')();
+    this.close();
   }
 });
 
