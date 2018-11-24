@@ -1,0 +1,7 @@
+{{#docs-snippet name="list-group-example.hbs" title="list-group-example.hbs"}}
+  {{#list-group as |g|}}
+    {{g.item text="inline text here"}}
+    {{g.item primary=true disabled=true text="add some custom properties"}}
+    {{#g.item tagName="div"}}Use as a block as well with a custom tag{{/g.item}}
+  {{/list-group}}
+{{/docs-snippet}}
