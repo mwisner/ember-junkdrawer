@@ -6,7 +6,104 @@ https://www.npr.org/sections/theprotojournalist/2014/08/15/337759135/what-your-j
 ember install ember-junkdrawer
 ```
 
-# Quick & Dirty Component Examples
+# Examples
+For full docs, visit [the docs site](https://mwisner.github.io/ember-junkdrawer/latest/)
+
+## Bootstrap Extras
+The great [Ember Bootstrap](http://www.ember-bootstrap.com/) addon provides a lot of great functionality.
+This addon provides some useful items outside the scope for the more general purpose addon.
+
+### UI-Card Component
+A ergonomic contextual component for bootstrap's `.card` components. 
+
+```hbs
+    <UiCard as |c|>
+        <c.image position="top" src="htts://my-static-img.png">
+        <c.header>Card Header</c.header>
+        <c.body as |bod|>
+            <bod.title>Title</bod.title>
+            <bod.subtitle>Subtitle</bod.subtitle>
+            <bod.text>Card text here........</bod.text>
+        </c.body>
+        <c.footer>Card Footer</c.footer>
+    </UiCard>
+```
+
+### Close Button
+At long last, our national nightmare of copying and pasting a close button is over.
+
+```hbs
+  {{close-button (action "myCloseActionName")}}
+```
+
+### Link-Button
+Typing `btn btn-default` over and over again? SAD! It's the same arguments as `{{link-to}}`
+with an additional optional `type` param (defaults to `primary`). [See Ember Bootstrap {{#bs-button}}](http://www.ember-bootstrap.com/#/components/button)
+
+```hbs
+  {{#bs/link-button "posts.post" post.id type="primary"}}Read Post{{/bs/link-button}}
+```
+
+
+### List Groups
+Bootstrap list groups require too much boilerplate html. We provide a configurable set
+of components to create groups.
+
+```hbs
+  {{#bs/list-group as |g|}}
+    {{g.item text="inline text"}}
+    {{#g.item tagName="div" active=isActive disabled=isDisabled type="danger"}}
+      Blocks work too, with custom properties!
+    {{/#g.item}}
+    {{#g.action onClick=(action "myAction")}}
+      Clickable as a button
+    {{/g.action}}
+    {{#g.link "route.detail" "id"}}Just like a regular link{{/g.link}}
+  {{/bs/list-group}}
+```
+
+### Confirm Button
+A little more delicious syntax sugar :honey_pot: for when you want to have a button with
+modal confirmation.
+
+```hbs
+    {{#confirm-button
+      type="danger"
+      buttonText="Dangerous Action"
+      modalTitle="Trigger Missile Alert?"
+      onSubmit=(action "realMissileAlert")
+      onCancel=(action "fakeMissileAlert")
+    }}
+      This is the text that goes into the body of the modal.
+    
+    {{/confirm-button}}
+```
+
+### Form Controls
+This addon provides two custom form controls: Baremetrics Calendar and Avatar.
+Avatar is a custom upload type with configurable in-browser image cropping.
+
+```handlebars
+{{#bs-form model=changeset onSubmit=(action "submit") as |form|}}
+  {{#ui/ui-box as |b|}}
+    {{#b.body}}
+      {{form.element controlType="avatar" property="logoPropertyName"}}
+      {{form.element controlType="baremetrics" property="dateRange" options=(hash presets=presets)}}
+      {{form.element controlType="x-toggle" property="active" options=(hash theme="light")}}
+    {{/b.body}}
+  {{/ui/ui-box}}
+{{/bs-form}}
+```
+
+The baremetrics calendar element takes a hash of `options` that is the same hash available to pass
+to [Baremetrics Calendar](https://github.com/davewasmer/ember-baremetrics-calendar/pull/12)
+
+component.hbs:
+```handlebars
+{{component/my-component organization=model}}
+```
+
+
 ## Tables
 Template driven tables with support for filtering.
 
@@ -64,113 +161,6 @@ export default FormComponent.extend({
 
 });
 ```
-
-### Form Controls
-This addon provides two custom form controls: Baremetrics Calendar and Avatar.
-Avatar is a custom upload type with configurable in-browser image cropping.
-
-```handlebars
-{{#bs-form model=changeset onSubmit=(action "submit") as |form|}}
-  {{#ui/ui-box as |b|}}
-    {{#b.body}}
-      {{form.element controlType="avatar" property="logoPropertyName"}}
-      {{form.element controlType="baremetrics" property="dateRange" options=(hash presets=presets)}}
-      {{form.element controlType="x-toggle" property="active" options=(hash theme="light")}}
-    {{/b.body}}
-  {{/ui/ui-box}}
-{{/bs-form}}
-```
-
-The baremetrics calendar element takes a hash of `options` that is the same hash available to pass
-to [Baremetrics Calendar](https://github.com/davewasmer/ember-baremetrics-calendar/pull/12)
-
-component.hbs:
-```handlebars
-{{component/my-component organization=model}}
-```
-
-## UI Box
-component.hbs:
-```handlebars
-{{#ui/ui-box as |b|}}
-
-  {{#b.header}}
-    Create New Organization
-  {{/b.header}}
-
-  {{#b.body paddingSize=0}}
-    {{form.element label="Organization Name" controlType="text" property="name"}}
-  {{/b.body}}
-
-  {{#b.footer justifyContent='center'}}
-    {{bs-button defaultText="Create Organization" pendingText="Saving..." buttonType="submit"}}
-  {{/b.footer}}
-
-{{/ui/ui-box}}
-```
-
-`paddingSize` accepts integers `[0 - 5]`  
-`justifyContent` is configurable for header and footer components
- - accepts `start`, `center`, `end`, `between`, and `around`
-   - header defaults to start
-   - footer defaults to end
-
-
-## Bootstrap Extras
-The great [Ember Bootstrap](http://www.ember-bootstrap.com/) addon provides a lot of great functionality.
-This addon provides some useful items outside the scope for the more general purpose addon.
-
-### Close Button
-At long last, our national nightmare of copying and pasting a close button is over.
-
-```hbs
-  {{close-button (action "myCloseActionName")}}
-```
-
-### Link-Button
-Typing `btn btn-default` over and over again? SAD! It's the same arguments as `{{link-to}}`
-with an additional optional `type` param (defaults to `primary`). [See Ember Bootstrap {{#bs-button}}](http://www.ember-bootstrap.com/#/components/button)
-
-```hbs
-  {{#bs/link-button "posts.post" post.id type="primary"}}Read Post{{/bs/link-button}}
-```
-
-
-### List Groups
-Bootstrap list groups require too much boilerplate html. We provide a configurable set
-of components to create groups.
-
-```hbs
-  {{#bs/list-group as |g|}}
-    {{g.item text="inline text"}}
-    {{#g.item tagName="div" active=isActive disabled=isDisabled type="danger"}}
-      Blocks work too, with custom properties!
-    {{/#g.item}}
-    {{#g.action onClick=(action "myAction")}}
-      Clickable as a button
-    {{/g.action}}
-    {{#g.link "route.detail" "id"}}Just like a regular link{{/g.link}}
-  {{/bs/list-group}}
-```
-
-### Confirm Button
-A little more delicious syntax sugar :honey_pot: for when you want to have a button with
-modal confirmation.
-
-```hbs
-{{#confirm-button
-  type="danger"
-  buttonText="Dangerous Action"
-  modalTitle="Trigger Missile Alert?"
-  onSubmit=(action "realMissileAlert")
-  onCancel=(action "fakeMissileAlert")
-}}
-  This is the text that goes into the body of the modal.
-
-{{/confirm-button}}
-```
-
-
 
 # Tree Shaking
 Use either blacklist or whitelist, not both.
