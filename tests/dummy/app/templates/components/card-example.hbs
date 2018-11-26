@@ -1,0 +1,12 @@
+{{#docs-snippet name="card-example.hbs" title="card-example.hbs"}}
+  {{#ui-card as |card|}}
+    {{card.image src="https://getbootstrap.com/docs/4.1/assets/img/bootstrap-stack.png"}}
+    {{#card.header}}Header{{/card.header}}
+    {{#card.body flex=true direction="column-reverse" as |cb|}}
+      {{#cb.title}}Card Body Title{{/cb.title}}
+      {{#cb.subtitle}}Card Body Subtitle{{/cb.subtitle}}
+      {{#cb.text}}Card body text where the lorem goes{{/cb.text}}
+    {{/card.body}}
+    {{#card.footer}}Footer for all the things{{/card.footer}}
+  {{/ui-card}}
+{{/docs-snippet}}
