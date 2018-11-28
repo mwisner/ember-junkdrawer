@@ -17,22 +17,20 @@ export default Component.extend({
 
   /**
    * Handle Submit Success
-   * @method
    * @public
    */
   onSubmitSuccess() {},
 
-  isLoading: readOnly('submit.isRunning'),
+  isLoading: readOnly('submitTask.isRunning'),
 
   /**
    * Handle Server Errors
-   * @method
    * @public
    */
   onServerError() {},
 
   didReceiveAttrs() {
-    if (!this.get('model') || this.get('model').hasOwnProperty('save')) {
+    if (!this.get('model') || !this.get('model').hasOwnProperty('save')) {
       assert('you must provide a valid `model` object with a `save` method', false);
     }
   },
@@ -49,7 +47,7 @@ export default Component.extend({
       });
   }),
   actions: {
-    submit(model) {
+    submitAction(model) {
       this.get('submitTask').perform(model);
     }
   }
