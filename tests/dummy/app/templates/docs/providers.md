@@ -1,7 +1,7 @@
 # Form Providers
 
 Forms are hard. There are many times where app developers want to have repeatable business logic, but different 
-ui patterns. The form providers, stolen from [Ember Map](www.embermap.com), is a great way to remove form logic from 
+ui patterns. The form providers, stolen from [Ember Map](https://embermap.com/video/using-form-providers), is a great way to remove form logic from 
 controllers in a repeatable pattern.
 
 ## Quick Example
