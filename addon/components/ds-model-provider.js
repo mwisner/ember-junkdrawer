@@ -29,9 +29,21 @@ export default Component.extend({
    */
   onServerError() {},
 
+  /**
+   * Handle errors internally
+   * @private
+   */
+  handleErrors() {},
   didReceiveAttrs() {
     if (!this.get('model') || !this.get('model').hasOwnProperty('save')) {
       assert('you must provide a valid `model` object with a `save` method', false);
+    }
+  },
+
+  willDestroyElement() {
+    this._super(...arguments);
+    if (this.get('model.isNew')) {
+      this.get('model').deleteRecord();
     }
   },
 
@@ -43,7 +55,7 @@ export default Component.extend({
       })
       .catch(data => {
         this.onServerError(data);
-        throw data;
+        this.handleErrors(data);
       });
   }),
   actions: {
