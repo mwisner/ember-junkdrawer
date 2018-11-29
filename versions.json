@@ -2,79 +2,91 @@
   "feat/addon-docs": {
     "sha": "491c993f179ab8d241d57ef2759b653fb2128d92",
     "tag": null,
-    "path": "feat/addon-docs",
-    "name": "feat/addon-docs"
+    "path": "versions/feat/addon-docs",
+    "name": "feat/addon-docs",
+    "oldPath": "feat/addon-docs"
   },
   "master": {
-    "path": "master",
+    "path": "versions/master",
     "name": "master",
-    "sha": "dd46eeeff9c4ff5504b30c862f2a7b6d77f0c0a4",
+    "sha": "3728c42ddbaa8449cd060f7ab6763532f8130fd2",
     "tag": null
   },
   "v0.7.0": {
     "sha": "6be645ca74569ba742fb803b3fadd2d2b23379f2",
     "tag": "v0.7.0",
-    "path": "v0.7.0",
-    "name": "v0.7.0"
-  },
-  "latest": {
-    "path": "latest",
-    "name": "latest",
-    "sha": "264ee005e3d8755c4ac1ea8458d9ca565f72cc31",
-    "tag": "v0.9.2"
+    "path": "versions/v0.7.0",
+    "name": "v0.7.0",
+    "oldPath": "v0.7.0"
   },
   "v0.7.1": {
     "sha": "f8d2054dd8c45ea05d3d7bf7e6a61046559cf517",
     "tag": "v0.7.1",
-    "path": "v0.7.1",
-    "name": "v0.7.1"
+    "path": "versions/v0.7.1",
+    "name": "v0.7.1",
+    "oldPath": "v0.7.1"
   },
   "v0.7.2": {
-    "path": "v0.7.2",
+    "path": "versions/v0.7.2",
     "name": "v0.7.2",
     "sha": "204631037e65deb5e83a785679abca77f9110136",
-    "tag": "v0.7.2"
+    "tag": "v0.7.2",
+    "oldPath": "v0.7.2"
   },
   "v0.7.3": {
-    "path": "v0.7.3",
+    "path": "versions/v0.7.3",
     "name": "v0.7.3",
     "sha": "5bff9f9fbddb368b200defa513a16d0509a57061",
-    "tag": "v0.7.3"
+    "tag": "v0.7.3",
+    "oldPath": "v0.7.3"
   },
   "v0.7.4": {
-    "path": "v0.7.4",
+    "path": "versions/v0.7.4",
     "name": "v0.7.4",
     "sha": "21cf122cfa1be68ecd9d2d4b73bd8d43bd4f6e5c",
-    "tag": "v0.7.4"
+    "tag": "v0.7.4",
+    "oldPath": "v0.7.4"
   },
   "v0.7.5": {
-    "path": "v0.7.5",
+    "path": "versions/v0.7.5",
     "name": "v0.7.5",
     "sha": "4b995f50682a845e0f131147f3dd20a501ec00a0",
-    "tag": "v0.7.5"
+    "tag": "v0.7.5",
+    "oldPath": "v0.7.5"
   },
   "v0.8.0": {
-    "path": "v0.8.0",
+    "path": "versions/v0.8.0",
     "name": "v0.8.0",
     "sha": "b4682011242cdbdd8c83200d26e78587ecedc5e0",
-    "tag": "v0.8.0"
+    "tag": "v0.8.0",
+    "oldPath": "v0.8.0"
   },
   "v0.8.1": {
-    "path": "v0.8.1",
+    "path": "versions/v0.8.1",
     "name": "v0.8.1",
     "sha": "47ca57f334afb27293a4f682b27a310555c2c539",
-    "tag": "v0.8.1"
+    "tag": "v0.8.1",
+    "oldPath": "v0.8.1"
   },
   "v0.9.0": {
-    "path": "v0.9.0",
+    "path": "versions/v0.9.0",
     "name": "v0.9.0",
     "sha": "8d0f04d2ae7e375697e9a811f030fe730d8d198d",
-    "tag": "v0.9.0"
+    "tag": "v0.9.0",
+    "oldPath": "v0.9.0"
   },
   "v0.9.2": {
-    "path": "v0.9.2",
+    "path": "versions/v0.9.2",
     "name": "v0.9.2",
     "sha": "264ee005e3d8755c4ac1ea8458d9ca565f72cc31",
-    "tag": "v0.9.2"
+    "tag": "v0.9.2",
+    "oldPath": "v0.9.2"
+  },
+  "-latest": {
+    "path": "",
+    "name": "Latest",
+    "sha": "264ee005e3d8755c4ac1ea8458d9ca565f72cc31",
+    "tag": "v0.9.2",
+    "oldPath": "latest"
   }
 }
