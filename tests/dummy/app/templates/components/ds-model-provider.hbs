@@ -1,0 +1,15 @@
+{{#docs-snippet name="ds-model-example.hbs" title="ds-model-example.hbs"}}
+  {{#ds-form-provider
+    model=model
+    onSubmitSuccess=(action submitSuccess)
+    onServerError=(action (mut hasErrored) true)
+  as |provider|}}
+    {{#if hasErrored}}
+      <p class="alert-danger">An Error Has Occurred</p>
+    {{/if}}
+    {{#bs-form model=provider.model onSubmit=(action provider.submit) as |form|}}
+      {{form.element controlType="text" value="title" label="title"}}
+      {{#bs-button type="submit" disabled=provider.isLoading}}Save{{/bs-button}}
+    {{/bs-form}}
+  {{/ds-form-provider}}
+{{/docs-snippet}}

@@ -1,0 +1,8 @@
+{{#docs-snippet name="changeset-provider.hbs" title="changeset-route.hbs"}}
+  {{#ds-form-provider model=model validations=ModelValidator as |provider|}}
+    {{#bs-form model=provider.model onSubmit=(action provider.submit) as |form|}}
+      {{form.element controlType="text" value="title" label="title"}}
+      {{#bs-button type="submit" disabled=provider.isLoading}}Save{{/bs-button}}
+    {{/bs-form}}
+  {{/ds-form-provider}}
+{{/docs-snippet}}
