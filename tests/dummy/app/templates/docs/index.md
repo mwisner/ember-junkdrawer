@@ -8,6 +8,7 @@ This addon is a collection of helpful items in our programming junk-drawer. A he
 two parts: 
 - Bootstrap "Extras" 
 - UI Utilities 
+- Form Providers
 
 The Bootstrap extras are things the [Ember Bootstrap](www.emberbootstrap.com) doesn't include or are combinations of a 
 few existing components from there.
