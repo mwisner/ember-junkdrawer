@@ -7,6 +7,7 @@ import { readOnly } from '@ember/object/computed';
 
 export default Component.extend({
   layout,
+  tagName: '',
 
   /**
    * Model for form

@@ -2,7 +2,7 @@
   {{#ds-form-provider model=model validations=ModelValidator as |provider|}}
     {{#bs-form model=provider.model onSubmit=(action provider.submit) as |form|}}
       {{form.element controlType="text" value="title" label="title"}}
-      {{#bs-button type="submit" disabled=provider.isLoading}}Save{{/bs-button}}
+      {{#bs-button type="submit" disabled=provider.isLoading id="save"}}Save{{/bs-button}}
     {{/bs-form}}
   {{/ds-form-provider}}
 {{/docs-snippet}}

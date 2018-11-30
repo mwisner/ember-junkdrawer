@@ -24,7 +24,7 @@ module('Integration | Component | ds-model-provider', function(hooks) {
     await render(hbs`
       {{#ds-model-provider model=model onSubmitSuccess=(action submitSuccess) as |provider|}}
         
-        <button onclick={{action provider.submit model}} id="save">{{model.title}}</button>
+        <button onClick={{action provider.submit model}} id="save">{{model.title}}</button>
        
       {{/ds-model-provider}}
     `);
@@ -54,10 +54,10 @@ module('Integration | Component | ds-model-provider', function(hooks) {
 
     await render(hbs`
       {{#ds-model-provider model=model handleErrors=(action handleError) onServerError=(action onServerError) as |provider|}}
-        <button onclick={{action provider.submit model}} id="save">{{model.title}}</button>
+        <button onClick={{action provider.submit model}} id="error">{{model.title}}</button>
       {{/ds-model-provider}}
     `);
 
-    click('#save');
+    click('#error');
   });
 });
