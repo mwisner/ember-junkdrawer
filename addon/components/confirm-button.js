@@ -33,11 +33,11 @@ export default Component.extend({
   onCancel() {},
   actions: {
     submit(){
-      this._closeModal()
+      this._closeModal();
       this.onSubmit();
     },
     cancel() {
-      this._closeModal()
+      this._closeModal();
       this.onCancel();
     }
   }
