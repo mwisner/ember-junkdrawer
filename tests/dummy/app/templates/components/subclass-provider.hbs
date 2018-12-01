@@ -1,0 +1,13 @@
+{{#docs-snippet name="subclass-provider.js" language="javascript"}}
+
+  import ChangesetProvider from 'ember-junkdrawer/components/changeset-provider';
+  import MyValidation from '../../validators/my-validation';
+
+  export default ChangesetProvider.extend({
+    validations: MyValidation,
+    didReceiveAttrs() {
+      this._super(...arguments); // THIS IS REQUIRED!
+      this.customSetupHandler();
+    },
+  });
+{{/docs-snippet}}

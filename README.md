@@ -7,7 +7,7 @@ ember install ember-junkdrawer
 ```
 
 # Examples
-For full docs, visit [the docs site](https://mwisner.github.io/ember-junkdrawer/latest/)
+For full docs, visit [the docs site](https://mwisner.github.io/ember-junkdrawer/master/)
 
 ## Bootstrap Extras
 The great [Ember Bootstrap](http://www.ember-bootstrap.com/) addon provides a lot of great functionality.
@@ -98,11 +98,6 @@ Avatar is a custom upload type with configurable in-browser image cropping.
 The baremetrics calendar element takes a hash of `options` that is the same hash available to pass
 to [Baremetrics Calendar](https://github.com/davewasmer/ember-baremetrics-calendar/pull/12)
 
-component.hbs:
-```handlebars
-{{component/my-component organization=model}}
-```
-
 
 ## Tables
 Template driven tables with support for filtering.
@@ -136,7 +131,45 @@ Template driven tables with support for filtering.
 
 ## Forms
 
-component.js:
+
+## Form Providers
+Form providers are a way to provide some isolated business logic in a reusable manner in your UI without duplicating
+code between components/controllers when needing to reuse form business logic across different UIs. 
+
+### DS-Model Provider
+Takes a model as an argument and does no validation: 
+
+```handlebars
+{{#ds-form-provider
+   model=model
+   onSubmitSuccess=(action submitSuccess)
+   onServerError=(action (mut hasErrored) true)
+ as |provider|}}
+    {{#if hasErrored}}
+     <p class="alert-danger">An Error Has Occurred</p>
+    {{/if}}
+    {{#bs-form model=provider.model onSubmit=(action provider.submit) as |form|}}
+     {{form.element controlType="text" value="title" label="title"}}
+     {{#bs-button type="submit" disabled=provider.isLoading id="save"}}Save{{/bs-button}}
+    {{/bs-form}}
+{{/ds-form-provider}}
+```
+
+### Changeset Providers
+For users of ember-changeset, takes a model and optional validators, and provides a changeset. If your server returns
+JSON:API compliant errors, also applies those errors to the changset after a form submittal.
+
+```handlebars
+{{#changeset-provider model=model validations=ModelValidator as |provider|}}
+{{#bs-form model=provider.model onSubmit=(action provider.submit) as |form|}}
+  {{form.element controlType="text" value="title" label="title"}}
+  {{#bs-button type="submit" disabled=provider.isLoading}}Save{{/bs-button}}
+{{/bs-form}}
+{{/changeset-provider}}
+```
+
+## Encapsulated Form (Old Way)
+my-form-component.js:
 ```js
 import { inject as service } from '@ember/service';
 import { computed, get } from '@ember/object';
@@ -161,6 +194,13 @@ export default FormComponent.extend({
 
 });
 ```
+
+
+component.hbs:
+```handlebars
+{{component/my-form-component organization=model}}
+```
+
 
 # Tree Shaking
 Use either blacklist or whitelist, not both.

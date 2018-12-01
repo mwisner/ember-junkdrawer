@@ -24,3 +24,10 @@ If your backend conforms to JSON-API, the component will apply those errors to t
 of the changeset error handling and validations propagate down the component tree. 
 
 {{docs-snippet name='changeset-provider.hbs' title='mychangeset-route.hbs'}}
+
+## Subclassing 
+In many instances, you'll want to extend a base component to provide more resuable logic.
+
+{{docs-snippet name='subclass-provider.js' title='subclass-provider.js'}}
+ 
+ **Note:** You _must_ call `this._super()` when overriding the `didReceiveAttrs()` hook.
