@@ -17,7 +17,7 @@ This addon provides some useful items outside the scope for the more general pur
 A ergonomic contextual component for bootstrap's `.card` components. 
 
 ```hbs
-    <UiCard as |c|>
+    <BsCard as |c|>
         <c.image position="top" src="htts://my-static-img.png">
         <c.header>Card Header</c.header>
         <c.body as |bod|>
@@ -26,14 +26,14 @@ A ergonomic contextual component for bootstrap's `.card` components.
             <bod.text>Card text here........</bod.text>
         </c.body>
         <c.footer>Card Footer</c.footer>
-    </UiCard>
+    </BsCard>
 ```
 
 ### Close Button
 At long last, our national nightmare of copying and pasting a close button is over.
 
 ```hbs
-  {{close-button (action "myCloseActionName")}}
+  <CloseButton (action "myCloseActionName")/>
 ```
 
 ### Link-Button
@@ -50,16 +50,14 @@ Bootstrap list groups require too much boilerplate html. We provide a configurab
 of components to create groups.
 
 ```hbs
-  {{#bs/list-group as |g|}}
-    {{g.item text="inline text"}}
-    {{#g.item tagName="div" active=isActive disabled=isDisabled type="danger"}}
-      Blocks work too, with custom properties!
-    {{/#g.item}}
-    {{#g.action onClick=(action "myAction")}}
-      Clickable as a button
-    {{/g.action}}
-    {{#g.link "route.detail" "id"}}Just like a regular link{{/g.link}}
-  {{/bs/list-group}}
+  <ListGroup as |g|>
+    <g.item @text="inline-text">
+    <g.item @active="isActive" @tagName="div" @disabled=true @type="danger">
+      Blocks work too!
+    </g.item>
+    <g.action onClick={{action "myAction"}}>Send action as a button</g.action>
+    <g.link "route.detail" "id"> Links come free</g.link>
+  </ListGroup>
 ```
 
 ### Confirm Button
