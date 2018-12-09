@@ -10,12 +10,12 @@ module('Integration | Component | ui-card', function(hooks) {
 
     // Template block usage:
     await render(hbs`
-      {{#ui-card id="test" as |c|}}
+      {{#bs-card id="test" as |c|}}
         {{#c.header id="title"}}Title{{/c.header}}
         {{#c.body as |bod|}}
           {{#bod.text id="text"}}My text{{/bod.text}}
         {{/c.body}}
-      {{/ui-card}}
+      {{/bs-card}}
     `);
     assert.dom('#test').hasClass('card');
     assert.dom('#title').isVisible();
