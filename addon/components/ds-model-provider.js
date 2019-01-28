@@ -1,7 +1,6 @@
 import Component from '@ember/component';
 import layout from '../templates/components/ds-model-provider';
 import { task } from 'ember-concurrency';
-import { assert } from '@ember/debug'
 import { readOnly } from '@ember/object/computed';
 
 
