@@ -1,7 +1,6 @@
 import Component from '@ember/component';
 import layout from '../templates/components/ds-model-provider';
 import { task } from 'ember-concurrency';
-import { assert } from '@ember/debug'
 import { readOnly } from '@ember/object/computed';
 
 
@@ -35,11 +34,6 @@ export default Component.extend({
    * @private
    */
   handleErrors() {},
-  didReceiveAttrs() {
-    if (!this.get('model') || !this.get('model').hasOwnProperty('save')) {
-      assert('you must provide a valid `model` object with a `save` method', false);
-    }
-  },
 
   willDestroyElement() {
     this._super(...arguments);
