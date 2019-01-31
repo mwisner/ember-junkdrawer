@@ -68,7 +68,7 @@ export default DSModelProvider.extend({
     submitAction(changeset) {
       this.get('submitTask').perform(changeset)
     },
-    cancel() {
+    cancelAction() {
       this.get('changeset').rollback();
     }
   }
