@@ -63,5 +63,13 @@ export default DSModelProvider.extend({
         });
       }
     }
+  },
+  actions: {
+    submitAction(changeset) {
+      this.get('submitTask').perform(changeset)
+    },
+    cancel() {
+      this.get('changeset').rollback();
+    }
   }
 });
