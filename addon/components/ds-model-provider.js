@@ -35,13 +35,6 @@ export default Component.extend({
    */
   handleErrors() {},
 
-  willDestroyElement() {
-    this._super(...arguments);
-    if (this.get('model.isNew')) {
-      this.get('model').deleteRecord();
-    }
-  },
-
   submitTask: task(function*(model) {
     return yield model
       .save()
