@@ -50,7 +50,8 @@ export default DSModelProvider.extend({
 
   submitTask: task(function*(changeset) {
     if (changeset.isInvalid) {
-      this.onValidationErrors(changeset.errors, changeset)
+      this.onValidationErrors(changeset);
+      return changeset.get('errors');
     }
     return yield changeset
       .save()
