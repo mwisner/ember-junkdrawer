@@ -1,0 +1,37 @@
+<div class="w-full max-w-xs bg-grey-light">
+  {{#changeset-provider model=model as |provider|}}
+  {{log provider.changeset}}
+    <div class="bg-white shadow-md mx-auto rounded px-8 pt-6 pb-8 mb-4">
+      <h1>{{provider.changeset.title}}</h1>
+      <p>{{provider.changeset.createdAt}}</p>
+      <div>
+        <label for="title" class="block text-grey-darker text-sm font-bold mb-2">
+          Title
+        </label>
+        {{input id='title' type="text" value=provider.changeset.title class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline"}}
+      </div>
+
+
+      <div class="mt-2">
+        <label for="summary" class="block text-grey-darker text-sm font-bold mb-2">
+          Summary
+        </label>
+        {{input id='summary' type="text" value=provider.changeset.summary class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline"}}
+      </div>
+
+      <div class="mt-2">
+        <label for="body" class="block text-grey-darker text-sm font-bold mb-2">
+          Body
+        </label>
+        {{textarea id="body" value=provider.changeset.body class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline"}}
+      </div>
+
+
+      <button id='submit' onclick={{action provider.submit provider.changeset}} class="bg-white hover:bg-grey-lightest text-grey-darkest font-semibold py-2 px-4 border border-grey-light rounded shadow">
+        Save
+      </button>
+    </div>
+
+  {{/changeset-provider}}
+
+</div>
