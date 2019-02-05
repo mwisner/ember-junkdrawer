@@ -3,6 +3,8 @@ import layout from '../templates/components/changeset-provider';
 import lookupValidator from 'ember-changeset-validations';
 import Changeset from 'ember-changeset';
 import { A } from '@ember/array';
+import { task } from 'ember-concurrency';
+
 
 export default DSModelProvider.extend({
   layout,
@@ -24,6 +26,12 @@ export default DSModelProvider.extend({
    **/
   serverErrors: A(),
 
+  /**
+   * onValidationErrors - noop
+   * @public
+   */
+  onValidationErrors() {},
+
   didReceiveAttrs() {
     this._super(...arguments);
     let changeset = this.get('changeset');
@@ -38,6 +46,23 @@ export default DSModelProvider.extend({
 
     this.set('changeset', changeset);
   },
+
+
+  submitTask: task(function*(changeset) {
+    if (changeset.isInvalid) {
+      this.onValidationErrors(changeset.errors)
+    }
+    return yield changeset
+      .save()
+      .then(data => {
+        this.onSubmitSuccess(data);
+      })
+      .catch(data => {
+        this.onServerError(data);
+        this.handleErrors(data);
+      });
+  }),
+
   handleErrors(data) {
     if ('payload' in data) {
       data = data[ 'payload' ];
