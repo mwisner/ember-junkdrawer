@@ -11,54 +11,6 @@ const defaultOptions = {
 
 const componentDependencies = {};
 
-/**
- * I'm not really sure how to make this dynamic, so we use a shoddy file map
- * to make explicit tree-shaking a thing
- * @type {{}}
- */
-const fileMap = {
-  'components/bs-form/element/control/avatar.js': 'form-control:avatar',
-  'templates/bs-form/element/control/avatar.hbs': 'form-control:avatar',
-  'bs-form/element/control/avatar.hbs': 'form-control:avatar',
-
-  'components/form/changeset-form.js': 'component:changeset-form',
-
-  'components/ui/simple-form-group.js': 'component:simple-form-group',
-  'templates/ui/simple-form-group.hbs': 'component:simple-form-group',
-  'ui/simple-form-group.hbs': 'component:simple-form-group',
-
-  'components/ui/table-loader.js': 'component:table-loader',
-  'templates/ui/table-loader.hbs': 'component:table-loader',
-  'ui/table-loader.hbs': 'component:table-loader',
-
-  'components/ui/thing-list-item.js': 'component:thing-list-item',
-  'templates/ui/thing-list-item.hbs': 'component:thing-list-item',
-  'ui/thing-list-item.hbs': 'component:thing-list-item',
-
-  'components/ui/thing-list.js': 'component:thing-list',
-  'templates/ui/thing-list.hbs': 'component:thing-list',
-  'ui/thing-list.hbs': 'component:thing-list',
-
-  'components/ui/ui-box.js': 'component:ui-box',
-  'templates/ui/ui-box.hbs': 'component:ui-box',
-  'ui/ui-box.hbs': 'component:ui-box',
-
-  'helpers/ui-page-property.js': 'helper:ui-page-property',
-
-  'mixins/model-data-table-common.js': 'mixin:model-data-table-common',
-
-  'services/current-user.js': 'service:current-user',
-  'services/ui-global.js': 'service:ui-global',
-
-  'components/close-button.js': 'component:close-button',
-  'components/bs-card': 'component:bs-card',
-  'components/changeset-form': 'component:changeset-form',
-  'components/changeset-provider': 'component:changeset-provider',
-  'components/close-button': 'component:close-button',
-  'components/ds-model-provider': 'component:ds-model-provider',
-  'components/list-provider': 'component:list-provider'
-};
-
 // For ember-cli < 2.7 findHost doesnt exist so we backport from that version
 // for earlier version of ember-cli.
 // https://github.com/ember-cli/ember-cli/blame/16e4492c9ebf3348eb0f31df17215810674dbdf6/lib/models/addon.js#L533
