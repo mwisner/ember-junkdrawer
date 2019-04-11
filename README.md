@@ -201,8 +201,8 @@ component.hbs:
 
 
 # Tree Shaking
-Use either blacklist or whitelist, not both.
-In your ember-cli-build.js:
+There are quite a few random components in here, you can whitelist or black list certain components, services
+(and their subcomponents). 
 
 ```js
     'ember-junkdrawer': {
@@ -212,21 +212,6 @@ In your ember-cli-build.js:
     },
 ```
 
-## List of things that can be added/removed:
-| Type          |       Label |
-| ------------- | ------------- |
-| Form Control  | form-control:avatar  |
-| Component  | component:changeset-form  |
-| Component  | component:simple-form-group  |
-| Component  | component:table-loader  |
-| Component  | component:thing-list-item  |
-| Component  | component:thing-list  |
-| Component  | component:ui-box  |
-| Component  | compoennt:close-button |
-| Helper  | helper:ui-page-property  |
-| Mixin  | mixin:model-data-table-common  |
-| Service  | service:current-user  |
-| Service  | service:ui-global  |
 
 
 # Random Stuff
