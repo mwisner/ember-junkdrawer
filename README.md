@@ -100,6 +100,7 @@ to [Baremetrics Calendar](https://github.com/davewasmer/ember-baremetrics-calend
 ## Tables
 Template driven tables with support for filtering.
 
+<<<<<<< HEAD
 ```handlebars
 {{#table/model-table
   dir=dir
@@ -107,6 +108,18 @@ Template driven tables with support for filtering.
   columns=columns
   recordQuery=myQueryFilterOptions
   recordType=recordType as |t|}}
+=======
+
+Compatibility
+------------------------------------------------------------------------------
+
+* Ember.js v2.18 or above
+* Ember CLI v2.13 or above
+
+
+Installation
+------------------------------------------------------------------------------
+>>>>>>> 30dc97f... message
 
   {{#t.filter
     defaultRecordQuery=defaultRecordQuery
@@ -178,6 +191,7 @@ import OrganizationValidations from '../../validators/organization';
 export default FormComponent.extend({
   flashMessages: service(),
 
+<<<<<<< HEAD
   validator: OrganizationValidations,
   model: computed(function() {
     return get(this, 'organization');
@@ -219,6 +233,10 @@ There are quite a few random components in here, you can whitelist or black list
 ## Custom Blueprint
 `ember g changeset-form <name>`: Generates the default `.hbs` and `.js` files for
 the changeset form.
+=======
+See the [Contributing](CONTRIBUTING.md) guide for details.
+
+>>>>>>> 30dc97f... message
 
 ## Current User Service
 The `ember-junkdrawer` current user service provides lots of helpful functionality
