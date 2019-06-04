@@ -1,7 +1,7 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 import { task } from 'ember-concurrency';
-import { A } from "@ember/array";
+import { A } from '@ember/array';
 import { assert } from '@ember/debug';
 import { typeOf } from '@ember/utils';
 
@@ -20,14 +20,18 @@ export default Component.extend({
 
   didReceiveAttrs() {
     assert('Must provide valid `recordType`', this.recordType);
-    assert('Must provide a valid function for `hookPreQueryAlter`', typeOf(this.hookPreQueryAlter), 'function');
+    assert(
+      'Must provide a valid function for `hookPreQueryAlter`',
+      typeOf(this.hookPreQueryAlter),
+      'function'
+    );
     this.setProperties({
-      table: null,
+      page: 1,
       model: A([]),
       list: A([]),
-      canLoadMore: true,
+      canLoadMore: true
     });
-    this.get('loadList').perform()
+    this.get('loadList').perform();
   },
 
   /**
@@ -58,22 +62,24 @@ export default Component.extend({
 
     //
     // JSON API format
-    if (records.get("meta.pagination.page")) {
-      if (records.get("meta.pagination.page") < records.get("meta.pagination.pages")) {
+    if (records.get('meta.pagination.page')) {
+      if (
+        records.get('meta.pagination.page') <
+        records.get('meta.pagination.pages')
+      ) {
         this.set('canLoadMore', true);
-        this.set('page', records.get("meta.pagination.page") + 1);
+        this.set('page', records.get('meta.pagination.page') + 1);
       } else {
         this.set('canLoadMore', false);
       }
 
-    //
-    // Fall back to shoddy non-json api strategy, here we wait until our first 404 and then stop.
+      //
+      // Fall back to shoddy non-json api strategy, here we wait until our first 404 and then stop.
     } else {
       if (records.get('length')) {
         this.set('canLoadMore', true);
-        this.incrementProperty('page')
-      }
-      else {
+        this.incrementProperty('page');
+      } else {
         this.set('canLoadMore', false);
       }
     }
@@ -82,7 +88,7 @@ export default Component.extend({
   resetTable(reloadData) {
     this.setProperties({
       canLoadMore: true,
-      page: 1,
+      page: 1
     });
     this.get('list').clear();
     if (reloadData) {
@@ -94,9 +100,8 @@ export default Component.extend({
     update(query) {
       this.get('loadList').perform(query);
     },
-    resetTable(reloadData=false) {
+    resetTable(reloadData = false) {
       this.resetTable(reloadData);
     }
   }
-
 });
