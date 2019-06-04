@@ -9,7 +9,7 @@ module.exports = function(environment) {
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
-        // e.g. 'with-controller': true
+        // e.g. EMBER_NATIVE_DECORATOR_SUPPORT: true
       },
       EXTEND_PROTOTYPES: {
         // Prevent Ember Data from overriding Date.parse.
@@ -21,6 +21,10 @@ module.exports = function(environment) {
       // Here you can pass flags/options to your application instance
       // when it is created
     }
+  };
+
+  ENV['ember-cli-mirage'] = {
+    enabled: true
   };
 
   if (environment === 'development') {

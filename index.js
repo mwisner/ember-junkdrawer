@@ -11,51 +11,6 @@ const defaultOptions = {
 
 const componentDependencies = {};
 
-
-/**
- * I'm not really sure how to make this dynamic, so we use a shoddy file map
- * to make explicit tree-shaking a thing
- * @type {{}}
- */
-const fileMap = {
-  'components/bs-form/element/control/avatar.js': 'form-control:avatar',
-  'templates/bs-form/element/control/avatar.hbs': 'form-control:avatar',
-  'bs-form/element/control/avatar.hbs': 'form-control:avatar',
-
-  'components/form/changeset-form.js': 'component:changeset-form',
-
-  'components/ui/simple-form-group.js': 'component:simple-form-group',
-  'templates/ui/simple-form-group.hbs': 'component:simple-form-group',
-  'ui/simple-form-group.hbs': 'component:simple-form-group',
-
-  'components/ui/table-loader.js': 'component:table-loader',
-  'templates/ui/table-loader.hbs': 'component:table-loader',
-  'ui/table-loader.hbs': 'component:table-loader',
-
-  'components/ui/thing-list-item.js': 'component:thing-list-item',
-  'templates/ui/thing-list-item.hbs': 'component:thing-list-item',
-  'ui/thing-list-item.hbs': 'component:thing-list-item',
-
-  'components/ui/thing-list.js': 'component:thing-list',
-  'templates/ui/thing-list.hbs': 'component:thing-list',
-  'ui/thing-list.hbs': 'component:thing-list',
-
-  'components/ui/ui-box.js': 'component:ui-box',
-  'templates/ui/ui-box.hbs': 'component:ui-box',
-  'ui/ui-box.hbs': 'component:ui-box',
-
-  'helpers/ui-page-property.js': 'helper:ui-page-property',
-
-  'mixins/model-data-table-common.js': 'mixin:model-data-table-common',
-
-  'services/current-user.js': 'service:current-user',
-  'services/ui-global.js': 'service:ui-global',
-
-  'components/close-button.js': 'component:close-button'
-
-};
-
-
 // For ember-cli < 2.7 findHost doesnt exist so we backport from that version
 // for earlier version of ember-cli.
 // https://github.com/ember-cli/ember-cli/blame/16e4492c9ebf3348eb0f31df17215810674dbdf6/lib/models/addon.js#L533
@@ -68,7 +23,6 @@ function findHostShim() {
   return app;
 }
 
-
 module.exports = {
   name: 'ember-junkdrawer',
 
@@ -76,14 +30,20 @@ module.exports = {
     let findHost = this._findHost || findHostShim;
     let app = findHost.call(this);
 
-    let {isDevelopingAddon} = Object.assign({}, defaultOptions, app.options['ember-junkdrawer']);
+    let { isDevelopingAddon } = Object.assign(
+      {},
+      defaultOptions,
+      app.options['ember-junkdrawer']
+    );
 
     return isDevelopingAddon;
   },
 
   init() {
     this._super.init.apply(this, arguments);
-    this.debugTree = BroccoliDebug.buildDebugCallback(`ember-junkdrawer:${this.name}`);
+    this.debugTree = BroccoliDebug.buildDebugCallback(
+      `ember-junkdrawer:${this.name}`
+    );
   },
 
   included() {
@@ -94,7 +54,11 @@ module.exports = {
 
     this.app = app;
 
-    this.junkdrawerOptions = Object.assign({}, defaultOptions, app.options['ember-junkdrawer']);
+    this.junkdrawerOptions = Object.assign(
+      {},
+      defaultOptions,
+      app.options['ember-junkdrawer']
+    );
   },
 
   treeForAddon(tree) {
@@ -121,22 +85,31 @@ module.exports = {
     }
 
     return new Funnel(tree, {
-      exclude: [(name) => this.excludeComponent(name, whitelist, blacklist)]
+      exclude: [name => this.excludeComponent(name, whitelist, blacklist)]
     });
   },
 
   excludeComponent(name, whitelist, blacklist) {
-
-    let thing = null;
-    if (name in fileMap)  {
-      thing = fileMap[name];
-    }
-    if (!thing) {
+    let regex = /^(templates\/)?components\/|(services\/|helpers\/|mixins\/|utils\/)/;
+    let isExcludable = regex.test(name);
+    if (!isExcludable) {
       return false;
     }
 
-    let isWhitelisted = whitelist.indexOf(thing) !== -1;
-    let isBlacklisted = blacklist.indexOf(thing) !== -1;
+    let baseName = name.replace(regex, '');
+    let firstSeparator = baseName.indexOf('/');
+
+    if (firstSeparator === 0) {
+      baseName = baseName.substring(1);
+    }
+
+    baseName = baseName.substring(0, baseName.lastIndexOf('.'));
+    let isWhitelisted = whitelist.some(el => {
+      return baseName.includes(el);
+    });
+    let isBlacklisted = blacklist.some(el => {
+      return baseName.includes(el);
+    });
 
     if (whitelist.length === 0 && blacklist.length === 0) {
       return false;

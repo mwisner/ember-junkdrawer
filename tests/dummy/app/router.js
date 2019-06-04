@@ -7,7 +7,7 @@ const Router = AddonDocsRouter.extend({
 });
 
 Router.map(function() {
-
+  this.route('example')
   docsRoute(this, function() {
     this.route('forms'); // docs subpage
     this.route('extras');

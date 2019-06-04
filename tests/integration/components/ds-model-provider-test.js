@@ -3,6 +3,7 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render, click } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import EmberObject from '@ember/object';
+import { Promise } from 'rsvp';
 
 module('Integration | Component | ds-model-provider', function(hooks) {
   setupRenderingTest(hooks);
@@ -18,17 +19,14 @@ module('Integration | Component | ds-model-provider', function(hooks) {
       }
     });
     this.set('model', fakeModel);
-    this.set('submitSuccess', function () {
+    this.set('submitSuccess', function() {
       assert.ok(true, 'submitSuccess Callback called');
     });
     await render(hbs`
       {{#ds-model-provider model=model onSubmitSuccess=(action submitSuccess) as |provider|}}
-        
         <button onClick={{action provider.submit model}} id="save">{{model.title}}</button>
-       
       {{/ds-model-provider}}
     `);
-
     assert.dom('#save').hasText('My Title');
     click('#save');
   });
@@ -40,7 +38,7 @@ module('Integration | Component | ds-model-provider', function(hooks) {
       save() {
         return new Promise((resolve, reject) => {
           reject(assert.ok(true, 'promise is rejected'));
-        })
+        });
       }
     });
 
