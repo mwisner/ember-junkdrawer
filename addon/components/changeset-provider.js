@@ -4,7 +4,7 @@ import lookupValidator from 'ember-changeset-validations';
 import Changeset from 'ember-changeset';
 import { A } from '@ember/array';
 import { task } from 'ember-concurrency';
-
+import { assert } from '@ember/debug';
 
 export default DSModelProvider.extend({
   layout,
@@ -34,19 +34,27 @@ export default DSModelProvider.extend({
 
   didReceiveAttrs() {
     this._super(...arguments);
+    let model = this.get('model');
     let changeset = this.get('changeset');
 
-    if (!changeset) {
-      if (this.get('validator')) {
-        changeset = new Changeset(this.get('model'), lookupValidator(this.get('validator')), this.get('validator'))
-      } else {
-        changeset = new Changeset(this.get('model'))
-      }
+    assert('Must provide either model or changeset', model || changeset);
+
+    if (!model) {
+      return;
+    }
+
+    if (this.get('validator')) {
+      changeset = new Changeset(
+        this.get('model'),
+        lookupValidator(this.get('validator')),
+        this.get('validator')
+      );
+    } else {
+      changeset = new Changeset(this.get('model'));
     }
 
     this.set('changeset', changeset);
   },
-
 
   submitTask: task(function*(changeset) {
     if (changeset.isInvalid) {
@@ -66,15 +74,20 @@ export default DSModelProvider.extend({
 
   handleErrors(data) {
     if ('payload' in data) {
-      data = data[ 'payload' ];
+      data = data['payload'];
     }
     if ('errors' in data) {
-      if (Array.isArray(data[ 'errors' ])) {
-        data[ 'errors' ].forEach(item => {
+      if (Array.isArray(data['errors'])) {
+        data['errors'].forEach(item => {
           if (this.get('changeset')) {
-            let { source: { pointer }, title = '', detail = '' } = item;
+            let {
+              source: { pointer },
+              title = '',
+              detail = ''
+            } = item;
             let keys = pointer.split('/');
-            let key = (keys[ 1 ] === 'attributes') ? keys.splice(2) : keys.splice(1);
+            let key =
+              keys[1] === 'attributes' ? keys.splice(2) : keys.splice(1);
             key = key.join('.');
             this.get('changeset').pushErrors(key, title, detail);
           } else {
@@ -83,16 +96,16 @@ export default DSModelProvider.extend({
         });
       }
 
-      if ('non_field_errors' in data[ 'errors' ]) {
-        data[ 'errors' ][ 'non_field_errors' ].forEach(item => {
-          this.get('serverErrors').addObject(item.detail)
+      if ('non_field_errors' in data['errors']) {
+        data['errors']['non_field_errors'].forEach(item => {
+          this.get('serverErrors').addObject(item.detail);
         });
       }
     }
   },
   actions: {
     submitAction(changeset) {
-      this.get('submitTask').perform(changeset)
+      this.get('submitTask').perform(changeset);
     },
     cancelAction() {
       this.get('changeset').rollback();
